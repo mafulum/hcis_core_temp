@@ -70,6 +70,8 @@
                             <li><a href="<?php echo base_url() . "index.php/employee/emp_date_ov/" . $this->global_m->get_array_data($master_emp, "PERNR"); ?>""> <i class="fa fa-caret-square-o-right"></i> Date Specification</a></li>
                             <?php } if($this->common->check_permission('EmployeeMasterData.Organization.MonitoringOfTask')){ ?>
                             <li><a href="<?php echo base_url() . "index.php/employee/emp_monitoring/" . $this->global_m->get_array_data($master_emp, "PERNR"); ?>""> <i class="fa fa-caret-square-o-right"></i> Monitoring of Task</a></li>
+                            <?php } if($this->common->check_permission('EmployeeMasterData.Organization.MonitoringOfTask')){ ?>
+                            <li><a href="<?php echo base_url() . "index.php/employee/emp_sup_matriks/" . $this->global_m->get_array_data($master_emp, "PERNR"); ?>""> <i class="fa fa-caret-square-o-right"></i> Sup. Matriks</a></li>
                             <?php } ?>
                         </ul>
                     </div>

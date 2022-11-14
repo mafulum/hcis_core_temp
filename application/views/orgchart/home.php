@@ -46,11 +46,11 @@
                                 <i class="fa fa-sitemap"></i> Relationship
                             </a>
                         </li>
-                        <li class="" id="toAdditionalRelation">
+                        <!-- <li class="" id="toAdditionalRelation">
                             <a href="#oAdditionalRelationship" data-toggle="tab">
                                 <i class="fa fa-sitemap"></i> Additional Relationship
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </header>
                 <div class="panel-body">

@@ -395,7 +395,7 @@ jQuery(document).ready(function() {
     }
 
     function get_emp_mapping($sNopeg) {
-        $sQuery = "SELECT m.NIK, g.STEXT as PERSH, r.STEXT as ORG, p.STEXT as POSISI,COMP_REF " .
+        $sQuery = "SELECT e.CNAME,m.NIK, g.STEXT as PERSH, r.STEXT as ORG, p.STEXT as POSISI,COMP_REF " .
                 "FROM (SELECT * FROM tm_mapping_pernr WHERE PERNR='" . $sNopeg . "') m " .
                 "JOIN (SELECT * FROM tm_master_emp WHERE PERNR='" . $sNopeg . "' AND CURDATE() BETWEEN BEGDA AND ENDDA) e " .
                 "JOIN (SELECT * FROM tm_emp_org WHERE PERNR='" . $sNopeg . "' AND CURDATE() BETWEEN BEGDA AND ENDDA) o " .

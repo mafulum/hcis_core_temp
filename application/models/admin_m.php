@@ -1775,6 +1775,167 @@ jQuery(document).ready(function() {
         $aRow = $oRes->row_array();
         return $aRow['n']."000000";
     }
+
+
+    function get_pic_customer_table($iSeq = "") {
+        if (!empty($iSeq)) {
+            $iSeq = " WHERE id=$iSeq";
+        }
+        $sQuery = "SELECT * FROM tm_pic_customer" . $iSeq;
+        $oRes = $this->db->query($sQuery);
+        $aRes = $oRes->result_array();
+        $oRes->free_result();
+        if (!empty($iSeq))
+            return $aRes[0];
+        return $aRes;
+    }    
+    function pic_customer() {
+        $data['base_url'] = $this->config->item('base_url');
+        $data['view'] = 'admin/pic_customer';
+		$data["userid"] = $this->session->userdata('username');
+        $data['table'] = $this->get_pic_customer_table();
+        $data['scriptJS'] ='
+<script>
+var modalAnswer="0";
+function confirm_delete(href){
+    $("#confirm-delete").modal("show").on("hidden.bs.modal", function (e) {
+        if(modalAnswer=="1"){                
+            window.location=href;
+        }
+    });
+}
+jQuery(document).ready(function() {
+    $("#btnYes").click( function(){
+        modalAnswer="1";
+        $("#confirm-delete").modal("hide");
+    });
+    $("#btnNo").click( function(){
+        modalAnswer="2";
+        $("#confirm-delete").modal("hide");
+    });
+});
+</script>
+';
+        return $data;
+    }
+
+    
+
+    function pic_customer_fr_update($iSeq) {
+        $data['frm'] = $this->get_pic_customer_table($iSeq);
+        $data['base_url'] = $this->config->item('base_url');
+        $data['view'] = 'admin/pic_customer_fr_update';
+		$data["userid"] = $this->session->userdata('username');
+        $data['werks'] = $this->global_m->get_abbrev("5");
+        $data['externalJS'] = '<script type="text/javascript" src="' . base_url() . 'js/select2.min.js"></script>';
+        $data['externalCSS'] = '<link href="' . base_url() . 'css/select2.css" rel="stylesheet">';
+        $data['externalJS'] .='<script type="text/javascript" src="' . base_url() . 'js/jquery.validate.min.js"></script>';
+        $data['scriptJS'] ='
+<script>
+var modalAnswer="0";
+jQuery(document).ready(function() {
+    $("#WERKS").select2();
+    $("#fr_update").validate({
+        rules: {
+            begda: "required",
+            endda: "required",
+            WERKS: "required",
+            type: "required",
+            pernr: "required"
+        },
+        messages: {
+            begda: "Please enter BEGDA",
+            endda: "Please enter ENDDA",
+            WERKS: "Please enter WERKS",
+            pernr: "Please enter PERNR",
+            type: "Please enter TYPE"
+            },submitHandler: function() {
+                $("#confirm-update").modal("show").on("hidden.bs.modal", function (e) {
+                    if(modalAnswer=="1"){
+                        $("#fr_update")[0].submit();
+                    }
+                });
+            }
+        });
+        $("#btnYes").click( function(){
+            modalAnswer="1";
+            $("#confirm-update").modal("hide");
+        });
+        $("#btnNo").click( function(){
+            modalAnswer="2";
+            $("#confirm-update").modal("hide");
+        });
+});
+</script>
+';
+        return $data;
+    }
+
+    function pic_customer_fr_new() {
+        $data['base_url'] = $this->config->item('base_url');
+        $data['view'] = 'admin/pic_customer_fr_new';
+        $data['werks'] = $this->global_m->get_abbrev("5");
+        $data['externalJS'] = '<script type="text/javascript" src="' . base_url() . 'js/select2.min.js"></script>';
+        $data['externalCSS'] = '<link href="' . base_url() . 'css/select2.css" rel="stylesheet">';
+        $data['externalJS'] .='<script type="text/javascript" src="' . base_url() . 'js/jquery.validate.min.js"></script>';
+        $data['scriptJS'] ='
+<script>
+var modalAnswer="0";
+jQuery(document).ready(function() {
+    $("#WERKS").select2();
+    $("#fr_insert").validate({
+        rules: {
+            begda: "required",
+            endda: "required",
+            WERKS: "required",
+            type: "required",
+            pernr: "required"
+        },
+        messages: {
+            begda: "Please enter BEGDA",
+            endda: "Please enter ENDDA",
+            WERKS: "Please enter WERKS",
+            pernr: "Please enter PERNR",
+            type: "Please enter TYPE"
+        },submitHandler: function() {
+            $("#confirm-insert").modal("show").on("hidden.bs.modal", function (e) {
+                if(modalAnswer=="1"){
+                    $("#fr_insert")[0].submit();
+                }
+            });
+        }
+    });
+        $("#btnYes").click( function(){
+            modalAnswer="1";
+            $("#confirm-insert").modal("hide");
+        });
+        $("#btnNo").click( function(){
+            modalAnswer="2";
+            $("#confirm-insert").modal("hide");
+        });
+});
+</script>
+';
+        return $data;
+    }
+
+    function pic_customer_upd($iSeq, $a) {
+        $this->db->where('id', $iSeq);
+        $a['updated_by'] = $this->session->userdata('username');
+        $this->db->update("tm_pic_customer", $a);
+    }
+
+    function pic_customer_delete($iSeq) {
+        $this->db->where('id', $iSeq);
+        $this->db->delete("tm_pic_customer");
+        $this->global_m->insert_log_delete('tm_pic_customer',array('id'=> $iSeq));
+    }
+
+    function pic_customer_insert($a) {
+        $a['created_by']= $this->session->userdata('username');
+        $this->db->insert('tm_pic_customer', $a);
+    }
+
 }
 
 ?>

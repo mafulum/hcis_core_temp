@@ -132,6 +132,8 @@ $aModule = $this->common->get_module_access();
                 <li><a href="<?php echo base_url() . "index.php/admin/cr_readiness"; ?>">Criteria Readiness</a></li>
                 <?php } if($this->common->check_permission('ConfigMenu.MasterCompetency')){ ?>
                 <li><a href="<?php echo base_url() . "index.php/admin/m_competency"; ?>">Master Competency</a></li>
+                <?php } if($this->common->check_permission('ConfigMenu.MasterCompetency')){ ?>
+                <li><a href="<?php echo base_url() . "index.php/admin/pic_customer"; ?>">PIC Customer</a></li>
                 <?php } ?>
             </ul>
         </li>

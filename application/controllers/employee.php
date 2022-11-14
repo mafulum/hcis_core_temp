@@ -2708,7 +2708,6 @@ AND o.OBJID NOT IN(SELECT PLANS FROM tm_emp_org WHERE CURDATE() BETWEEN BEGDA AN
                     $sQuery = "UPDATE tm_emp_motask SET ENDDA='" . $aX['ival'] . "',updated_by = '".$this->session->userdata('username')."' WHERE id='" . $aRow['id'] . "' AND REMINDER_TYPE='" . $a['REMINDER_TYPE'] . "' ;";
                     $this->db->query($sQuery);
                 }
-//                var_dump($a);exit;
                 $this->emp_motask_m->emp_monitoring_new($a);
                 redirect('employee/emp_monitoring/' . $pernr, 'refresh');
             } else {
@@ -2965,6 +2964,127 @@ AND o.OBJID NOT IN(SELECT PLANS FROM tm_emp_org WHERE CURDATE() BETWEEN BEGDA AN
         }
     }
 
-}
+    function emp_sup_matriks($sNopeg) {
+        if (!$this->form_validation->validate($sNopeg, 'required|numeric|max_length[8]|xss_clean')) {
+            redirect('employee/master', 'refresh');
+        } else {
+            $this->load->model('pa/emp_sup_matriks_m');
+            $data = $this->emp_sup_matriks_m->ov($sNopeg);
+            $this->load->view('main', $data);
+        }
+    }
+    
+    function emp_sup_matriks_view($sNopeg = "", $iSeq = 0) {
+        $this->load->model('pa/emp_sup_matriks_m');
+        $data = $this->emp_sup_matriks_m->view($iSeq, $sNopeg);
+        $this->load->view('main', $data);
+    }
 
+    function emp_sup_matriks_fr($sNopeg = "", $iSeq = 0) {
+        $this->load->model('pa/emp_sup_matriks_m');
+        if (!empty($iSeq) && !empty($sNopeg)) {
+            $data = $this->emp_sup_matriks_m->fr_update($iSeq, $sNopeg);
+            $this->load->view('main', $data);
+        } else if (!empty($sNopeg)) {
+            $data = $this->emp_sup_matriks_m->fr_new($sNopeg);
+            $this->load->view('main', $data);
+        } else {
+            redirect('employee/master', 'refresh');
+        }
+    }
+
+    function emp_sup_matriks_update() {
+        if ($this->input->post()) {
+            $this->form_validation->set_rules('id', 'id', 'trim|required|numeric');
+            $this->form_validation->set_rules('pernr', 'pernr', 'trim|required');
+            $this->form_validation->set_rules('begda', 'begda', 'trim|required');
+            $this->form_validation->set_rules('endda', 'endda', 'trim|required');
+            $this->form_validation->set_rules('SUBTY', 'SUBTY', 'trim|required');
+            $this->form_validation->set_rules('WERKS', 'WERKS', 'trim|required');
+            if ($this->form_validation->run()) {
+                $this->load->model('pa/emp_sup_matriks_m');
+                $id = $this->input->post('id');
+                $pernr = $this->input->post('pernr');
+                $a['begda'] = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('begda'));
+                $a['endda'] = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('endda'));
+                $a['SUBTY'] = $this->input->post('SUBTY');
+                $a['WERKS'] = $this->input->post('WERKS');
+                $a['PERNR_MATRIKS'] = $this->input->post('PERNR_MATRIKS');
+                $this->emp_sup_matriks_m->db_upd($id, $pernr, $a);
+                redirect('employee/emp_sup_matriks/' . $pernr, 'refresh');
+            } else
+                redirect('employee/master', 'refresh');
+        } else {
+            redirect('employee/master', 'refresh');
+        }
+    }
+
+    function emp_sup_matriks_new() {
+        if ($this->input->post()) {
+            $this->form_validation->set_rules('pernr', 'pernr', 'trim|required');
+            $this->form_validation->set_rules('begda', 'begda', 'trim|required');
+            $this->form_validation->set_rules('endda', 'endda', 'trim|required');
+            $this->form_validation->set_rules('SUBTY', 'SUBTY', 'trim|required');
+            $this->form_validation->set_rules('WERKS', 'WERKS', 'trim|required');
+            $this->form_validation->set_rules('PERNR_MATRIKS', 'PERNR_MATRIKS', 'trim|required');
+            if ($this->form_validation->run()) {
+                $this->load->model('pa/emp_sup_matriks_m');
+                $a['pernr'] = $pernr = $this->input->post('pernr');
+                $a['begda'] = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('begda'));
+                $a['endda'] = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('endda'));
+                $a['SUBTY'] = $this->input->post('SUBTY');
+                $a['WERKS'] = $this->input->post('WERKS');
+                $a['PERNR_MATRIKS'] = $this->input->post('PERNR_MATRIKS');
+                $oRes = $this->emp_sup_matriks_m->check_time_constraint($a['pernr'], $a['begda'], $a['endda'], $a['SUBTY'], "CHECK");
+                if (!empty($oRes) && $oRes != 'null' && $oRes->num_rows() > 0) {
+                    $sQuery = "DELETE FROM tm_emp_sup_matriks where pernr='" . $a['pernr'] . "' AND SUBTY='" . $a['SUBTY'] . "' AND begda>='" . $a['begda'] . "' AND endda<='" . $a['endda'] . "'";
+                    $this->db->query($sQuery);
+                    $this->global_m->insert_log_delete('tm_emp_sup_matriks',$sQuery);
+                    $oRes = $this->emp_sup_matriks_m->check_time_constraint($a['pernr'], $a['begda'], $a['endda'], $a['SUBTY'], "CHECK");
+                }   
+                // var_dump($oRes);exit;
+                // var_dump($oRes->row_array());exit;
+                if (!empty($oRes) && $oRes != 'null' && $oRes->num_rows() == 1) {
+                    $aRow = $oRes->row_array();
+                    $sQuery = "SELECT DATE_SUB('" . $a['begda'] . "',INTERVAL 1 DAY) ival";
+                    $oRes = $this->db->query($sQuery);
+                    $aX = $oRes->row_array();
+                    $sQuery = "UPDATE tm_emp_sup_matriks SET ENDDA='" . $aX['ival'] . "',updated_by = '".$this->session->userdata('username')."' WHERE id='" . $aRow['id'] . "' AND SUBTY='" . $a['SUBTY'] . "' ;";
+                    $this->db->query($sQuery);
+                }
+                $this->emp_sup_matriks_m->db_new($a);
+                redirect('employee/emp_sup_matriks/' . $pernr, 'refresh');
+            } else {
+                redirect('employee/master', 'refresh');
+            }
+        } else {
+            redirect('employee/master', 'refresh');
+        }
+    }
+
+    function emp_sup_matriks_del($sNopeg, $id) {
+        $this->load->model('pa/emp_sup_matriks_m');
+        $this->emp_sup_matriks_m->db_del($id, $sNopeg);
+        redirect('employee/emp_sup_matriks/' . $sNopeg, 'refresh');
+    }
+
+    function insert_check_time_constraint_emp_sup_matriks() {
+        $this->load->model('pa/emp_sup_matriks_m');
+        $pernr = $this->input->post('pernr');
+        $subty = $this->input->post('subty');
+        $begda = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('begda'));
+        $endda = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('endda'));
+        echo $this->emp_sup_matriks_m->check_time_constraint($pernr, $begda, $endda, $subty, "INSERT");
+    }
+
+    function update_check_time_constraint_emp_sup_matriks() {
+        $this->load->model('pa/emp_sup_matriks_m');
+        $pernr = $this->input->post('pernr');
+        $subty = $this->input->post('subty');
+        $begda = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('begda'));
+        $endda = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('endda'));
+        $id = $this->input->post('id');
+        echo $this->emp_sup_matriks_m->check_time_constraint($pernr, $begda, $endda, $subty, "UPDATE", $id);
+    }
+}
 ?>

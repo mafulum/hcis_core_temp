@@ -855,6 +855,85 @@ class admin extends CI_Controller {
         redirect('admin/cr_readiness_fr/'. $id_criteria, 'refresh');
     }
 
+    function pic_customer() {
+        $data = $this->admin_m->pic_customer();
+        $this->load->view('main', $data);
+    }
+
+    function pic_customer_fr($iSeq = "") {
+        if (!empty($iSeq)) {
+            $data = $this->admin_m->pic_customer_fr_update($iSeq);
+            $this->load->view('main', $data);
+        } else {
+            $data = $this->admin_m->pic_customer_fr_new();
+            $this->load->view('main', $data);
+        }
+    }
+
+    function pic_customer_upd() {
+        if ($this->input->post()) {
+            $this->form_validation->set_rules('id', 'id', 'trim|required|numeric');
+            $this->form_validation->set_rules('type', 'type', 'trim|required');
+            $this->form_validation->set_rules('WERKS', 'WERKS', 'trim|required');
+            $this->form_validation->set_rules('pernr', 'pernr', 'trim|required');
+            $this->form_validation->set_rules('begda', 'begda', 'trim|required');
+            $this->form_validation->set_rules('endda', 'endda', 'trim|required');
+            if ($this->form_validation->run()) {
+                $id = $this->input->post('id');
+                $a['type'] = $this->input->post('type');
+                $a['WERKS'] = $this->input->post('WERKS');
+                $a['pernr'] = $this->input->post('pernr');
+                $a['unit_stext'] = $this->input->post('unit_stext');
+                $a['unit_short'] = $this->input->post('unit_short');
+                $a['position'] = $this->input->post('position');
+                $a['nama'] = $this->input->post('nama');
+                $a['email'] = $this->input->post('email');
+                $a['begda'] = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('begda'));
+                $a['endda'] = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('endda'));
+                // echo $id;exit;
+                // var_dump($a);exit;
+                $this->admin_m->pic_customer_upd($id, $a);
+                redirect('admin/pic_customer/', 'refresh');
+            } else
+                redirect('admin/pic_customer', 'refresh');
+        } else {
+            redirect('admin/pic_customer', 'refresh');
+        }
+    }
+
+    function pic_customer_new() {
+        if ($this->input->post()) {
+            // var_dump($_POST);exit;
+            $this->form_validation->set_rules('type', 'type', 'trim|required');
+            $this->form_validation->set_rules('WERKS', 'WERKS', 'trim|required');
+            $this->form_validation->set_rules('pernr', 'pernr', 'trim|required');
+            $this->form_validation->set_rules('begda', 'begda', 'trim|required');
+            $this->form_validation->set_rules('endda', 'endda', 'trim|required');
+            if ($this->form_validation->run()) {
+                $a['type'] = $this->input->post('type');
+                $a['WERKS'] = $this->input->post('WERKS');
+                $a['pernr'] = $this->input->post('pernr');
+                $a['unit_stext'] = $this->input->post('unit_stext');
+                $a['unit_short'] = $this->input->post('unit_short');
+                $a['position'] = $this->input->post('position');
+                $a['nama'] = $this->input->post('nama');
+                $a['email'] = $this->input->post('email');
+                $a['begda'] = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('begda'));
+                $a['endda'] = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('endda'));
+                $this->admin_m->pic_customer_insert($a);
+                redirect('admin/pic_customer/', 'refresh');
+            } else
+                redirect('admin/pic_customer', 'refresh');
+        } else {
+            redirect('admin/pic_customer', 'refresh');
+        }
+    }
+
+    function pic_customer_del($iSeq) {
+        $this->admin_m->pic_customer_delete($iSeq);
+        redirect('admin/pic_customer/', 'refresh');
+    }
+
 }
 
 ?>
