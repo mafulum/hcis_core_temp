@@ -1,7 +1,7 @@
 version: '3.5'
 
 services:
-  apache:
+  apache56-prod:
     image: php:5.6-apache
     container_name: hcis_gdps_prod
     ports:
