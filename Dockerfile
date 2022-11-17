@@ -28,6 +28,7 @@ COPY docker/apache2.conf /etc/apache2/apache2.conf
 COPY docker/php.ini /usr/local/etc/php/php.ini
 COPY docker/php.ini-development /usr/local/etc/php/php.ini-development
 COPY docker/php.ini-production /usr/local/etc/php/php.ini-production
+COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 WORKDIR /var/www/html/
 ADD . /var/www/html
