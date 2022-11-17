@@ -19,7 +19,7 @@ RUN apt-get -y install --fix-missing apt-utils nano wget dialog \
 
 RUN docker-php-ext-configure opcache --enable-opcache
 RUN docker-php-ext-install curl tokenizer mcrypt mysqli json pdo pdo_mysql pgsql pdo_pgsql mbstring zip exif pcntl xsl bcmath
-RUN docker-php-ext-install bz2 calendar ctype curl ftp phar posix session simplexml snmp soap sockets sysvmsg sysvsem sysvshm tidy xml
+RUN docker-php-ext-install bz2 calendar ctype curl ftp posix session simplexml snmp soap sockets sysvmsg sysvsem sysvshm tidy xml
 RUN docker-php-ext-install -j$(nproc) intl
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install -j$(nproc) gd
