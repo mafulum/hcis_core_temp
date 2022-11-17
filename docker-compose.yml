@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  apache:
+    image: php:5.6-apache
+    container_name: hcis_gdps_prod
+    ports:
+      - "8008:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - TZ=Asia/Bangkok
+    restart: always
