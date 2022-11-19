@@ -530,7 +530,7 @@ class running extends CI_Controller {
         $paramAPI['date_payroll']=$this->input->get('date_payroll');
         $data = http_build_query($paramAPI);
         $curl = curl_init();
-        $url = 'http://localhost:8001/payroll/running'."?".$data;
+        $url = 'http://10.229.207.148:8001/payroll/running'."?".$data;
 //        if($this->session->userdata('username')=='mafulum'){
 //            $data = http_build_query($paramAPI);
 //            $url = 'http://localhost:8801/payroll/running'."?".$data;

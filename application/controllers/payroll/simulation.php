@@ -505,7 +505,7 @@ class simulation extends CI_Controller {
         $paramAPI['date_payroll']=$this->input->get('date_payroll');
         $data = http_build_query($paramAPI);
         $curl = curl_init();
-        $url = 'http://localhost:8001/payroll/simulation'."?".$data;
+        $url = 'http://10.229.207.148:8001/payroll/simulation'."?".$data;
 //        if($this->session->userdata('username')=='mafulum'){
 //            $url = 'http://localhost:8801/payroll/simulation'."?".$data;
 //        }

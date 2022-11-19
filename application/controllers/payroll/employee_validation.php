@@ -182,7 +182,7 @@ class employee_validation extends CI_Controller {
         
         $data = http_build_query($paramAPI);
         $curl = curl_init();
-        $url = 'http://localhost:8001/payroll/employee/check_up'."?".$data;
+        $url = 'http://10.229.207.148:8001/payroll/employee/check_up'."?".$data;
         curl_setopt_array($curl, array(
           CURLOPT_URL => $url,
           CURLOPT_RETURNTRANSFER => true,
