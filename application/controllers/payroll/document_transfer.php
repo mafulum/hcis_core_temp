@@ -258,7 +258,8 @@ class document_transfer extends CI_Controller {
 //        $filename =  $doc_transfer['name'] . "_BRI_" . date("%Y%m%d%H%i%s") . ".xlsx";
         $filename = "BANK_TRANSFER_REPORT_" . $id_document . ".xlsx";
         $objWriter->save('doc_transfers/' . $filename);
-        ob_clean();
+        if (ob_get_length()) ob_end_clean();
+        // ob_clean();
         //content type
         header('Content-type: application/vnd.ms-excel');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
