@@ -303,7 +303,8 @@ class document_transfer extends CI_Controller {
         if (empty($filename)) {
             return null;
         }
-        ob_clean();
+        if (ob_get_length()) ob_end_clean();
+        // ob_clean();
         //content type
         header('Content-type: application/vnd.ms-excel');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
@@ -355,7 +356,8 @@ class document_transfer extends CI_Controller {
         if (empty($filename)) {
             return null;
         }
-        ob_clean();
+        if (ob_get_length()) ob_end_clean();
+        // ob_clean();
         header('Content-type: application/vnd.ms-excel');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
         readfile('doc_transfers/' . $filename);
