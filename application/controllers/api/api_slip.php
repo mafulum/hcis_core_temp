@@ -29,7 +29,7 @@ class api_slip extends CI_Controller {
                     $aRes[]=$name;
                 }
             }
-            echo json_encode($aRes);
+            echo json_encode([$aRes]);
         }        
     }
     
