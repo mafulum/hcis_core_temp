@@ -20,7 +20,7 @@ class api_slip extends CI_Controller {
     public function list_year($nopeg){
         $dir    = getcwd().'/payslip/'.$nopeg;
         if(is_dir($dir)==false){
-            echo json_encode([[date('Y')]]);
+            echo json_encode([[date('Y')]);
         }else{
             $files = scandir($dir);
             $aRes = [];
@@ -29,7 +29,7 @@ class api_slip extends CI_Controller {
                     $aRes[]=$name;
                 }
             }
-            echo json_encode([$aRes]);
+            echo json_encode($aRes);
         }        
     }
     
