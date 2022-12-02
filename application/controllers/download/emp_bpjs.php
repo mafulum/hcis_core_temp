@@ -79,7 +79,7 @@ class emp_bpjs extends CI_Controller {
             LEFT JOIN (SELECT SHORT,STEXT as STEXT_PERSK FROM tm_master_abbrev WHERE SUBTY=4) mpersk ON eorg.PERSK=mpersk.SHORT  
             LEFT JOIN (SELECT bank_mid,BANK_NAME FROM tm_master_bank WHERE BEGDA<='$date' AND ENDDA>='$date' ) mbank ON ebank.BANK_MID=mbank.bank_mid
             LEFT JOIN (SELECT SHORT,STEXT as STEXT_PA FROM tm_master_abbrev WHERE SUBTY=26) mpa ON eorg.BTRTL=mpa.SHORT ORDER BY TanggalMasuk ASC,AKHIR_KONTRAK ASC";
-//        echo $sQuery;exit;
+       echo $sQuery;exit;
         $ores = $this->db->query($sQuery);
         $data = $ores->result_array();
         $this->load->library("excel");
