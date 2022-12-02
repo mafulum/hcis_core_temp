@@ -16,7 +16,7 @@ class Excel {
     var $workbook = '';
 
     // class constructor
-    function Excel()
+    function __construct()
     {
         $file_url = __FILE__;
         $library_dir = str_replace('\\','/', $file_url);
