@@ -1,8 +1,8 @@
 version: '3.5'
 
 services:
-  apache7-prod:
-    container_name: hcis_gdps_php7
+  apache56-prod:
+    container_name: hcis_gdps_prod
     ports:
       - "8008:80"
     volumes:
@@ -10,6 +10,6 @@ services:
     build: .
     environment:
       - TZ=Asia/Jakarta
-      - APP_ENV=development
-      - APP_DEBUG=true
+      - APP_ENV=production
+      - APP_DEBUG=false
     restart: always
