@@ -152,8 +152,8 @@ class slip_gaji extends CI_Controller {
         $pdf = new FPDF('L', 'mm', 'Letter');
         $pdf->AddPage();
 
-        $pdf->Image('http://10.229.207.148:8008/img/Beyond_Care.png', 10, 2, 30, 0, 'PNG');
-        $pdf->Image('http://10.229.207.148:8008/img/gdps_logo_white.png', 210, 0, 60, 0, 'PNG');
+        $pdf->Image('http://localhost/img/Beyond_Care.png', 10, 2, 30, 0, 'PNG');
+        $pdf->Image('http://localhost/img/gdps_logo_white.png', 210, 0, 60, 0, 'PNG');
         $pdf->Ln(10);
         $pdf->SetFont('Arial', 'B', 12);
 
