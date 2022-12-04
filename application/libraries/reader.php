@@ -256,7 +256,7 @@ class reader
      *
      * Some basic initialisation
      */ 
-    function reader()
+    function __construct()
     {
 //        $this->_ole =& new OLERead();
         $this->_ole = new OLERead();
