@@ -102,14 +102,14 @@ class bank_transfer_m extends CI_Model {
             }
         }
         for ($i = 0; $i < count($emp_transfer); $i++) {
-            if ($emp_transfer[$i]['TFMNT'] == 0) {
+            if (false & $emp_transfer[$i]['TFMNT'] == 0) {
                 continue;
             }
 
             if ($pernr != $emp_transfer[$i]['PERNR'] || $abkrs != $emp_transfer[$i]['ABKRS']) {
                 $pernr = $emp_transfer[$i]['PERNR'];
                 $abkrs = $emp_transfer[$i]['ABKRS'];
-                if (empty($emp_thp[$abkrs][$pernr])) {
+                if (false & empty($emp_thp[$abkrs][$pernr])) {
                     continue;
                 }
                 if (!empty($bte) && !empty($bte[$abkrs]) && !empty($bte[$abkrs][$pernr]) && $emp_transfer[$i]['TFMNT'] == $bte[$abkrs][$pernr]['bank_order'][$emp_transfer[$i]['BANK_ORDER']]['sum_wamnt']) {
