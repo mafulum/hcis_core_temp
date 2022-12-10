@@ -367,6 +367,6 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-
+$config['PATH_PHOTO_EMP'] = 'http://10.161.35.148:8183/api/direct_thumbnail/';
 /* End of file config.php */
 /* Location: ./application/config/config.php */

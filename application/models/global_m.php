@@ -754,12 +754,13 @@ AND eo.PERSG IN('X','Z') GROUP BY STELL;";
 
     public function get_photo64($pernr){
         $this->load->library('Curl');
-        $url = base_url()."img/avatar-mini4.jpg";
+        // $url = base_url()."img/avatar-mini4.jpg";
         // $data = file_get_contents($url);
         // return 'data:image/jpeg;base64,' . base64_encode($data);
         // return "";
         // $url = "https://byc-hcis.garudapratama.com/photo_emp/api/direct_thumbnail/" . $pernr."/base64";
         // $url = "http://172.10.30.23:8083/api/direct_thumbnail/" . $pernr."/base64";
+        $url = $this->config->item('PATH_PHOTO_EMP') . $pernr."/base64";
         return $this->curl->simple_get($url);
     }
 }
