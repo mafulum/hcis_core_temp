@@ -924,7 +924,9 @@ class running_result extends CI_Controller {
         $paramAPI['pernrs'] = $sJsonPernr;
         $data = http_build_query($paramAPI);
         $curl = curl_init();
-        $url = 'http://10.229.207.148:8001//payroll/employee/reconfirm' . "?" . $data;
+        // $url = 'http://10.229.207.148:8001//payroll/employee/reconfirm' . "?" . $data;
+        $url = $this->config->item('base_url_engine_payroll').'/payroll/employee/reconfirm' . "?" . $data;
+        
 //        if($this->session->userdata('username')=='mafulum'){
 //            $url = 'http://localhost:8801/payroll/employee/reconfirm'."?".$data;
 //        }
@@ -953,7 +955,8 @@ class running_result extends CI_Controller {
         }
         $data = http_build_query($paramAPI);
         $curl = curl_init();
-        $url = 'http://10.229.207.148:8001/payroll/employee/confirm' . "?" . $data;
+        // $url = 'http://10.229.207.148:8001/payroll/employee/confirm' . "?" . $data;
+        $url = $this->config->item('base_url_engine_payroll').'/payroll/employee/confirm' . "?" . $data;
 //        if($this->session->userdata('username')=='mafulum'){
 //            $url = 'http://localhost:8801/payroll/employee/confirm'."?".$data;
 //        }
@@ -979,7 +982,8 @@ class running_result extends CI_Controller {
         $paramAPI['code_payroll'] = $_GET['payroll_code'];
         $data = http_build_query($paramAPI);
         $curl = curl_init();
-        $url = 'http://10.229.207.148:8001/payroll/open_parquet' . "?" . $data;
+        // $url = 'http://10.229.207.148:8001/payroll/open_parquet' . "?" . $data;
+        $url = $this->config->item('base_url_engine_payroll').'/payroll/open_parquet' . "?" . $data;
 //        if($this->session->userdata('username')=='mafulum'){
 //            $url = 'http://localhost:8801/payroll/open_parquet'."?".$data;
 //        }

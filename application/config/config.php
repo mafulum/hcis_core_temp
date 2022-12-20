@@ -17,7 +17,7 @@ if(false && strpos($_SERVER['SERVER_NAME'], "garudapratama.com")){
 | path to your installation.
 |
 */
-//$config['base_url']	= 'http://172.10.30.23/hcis_gdps/';
+// $config['base_url']	= 'http://localhost:8008';
 $config['base_url']	= 'https://byc-hcis.garudapratama.com/hcis_gdps/';
 // $config['base_url']	= 'http://192.168.28.106:8008/';
 //$config['base_url']	= 'http://192.168.2.99/hris_gdps_temp/';
@@ -25,6 +25,8 @@ $config['base_url']	= 'https://byc-hcis.garudapratama.com/hcis_gdps/';
 // $config['base_url']	= 'http://192.168.1.7:8008/';
 // $config['base_url']	= 'https://hcis-gdps.gdps-test.com/';
 date_default_timezone_set('Asia/Jakarta');
+$config['base_url_engine_payroll']	= 'http://172.17.0.1:8001';
+// $config['base_url_engine_payroll']	= 'http://10.229.207.148:8001';
 /*
 |--------------------------------------------------------------------------
 | Index File

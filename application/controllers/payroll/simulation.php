@@ -413,7 +413,7 @@ class simulation extends CI_Controller {
                             vis_reg = "off";
                         }
                         $.ajax({
-                            url: "'. base_url().'/index.php/payroll/simulation/go",
+                            url: "'. base_url().'index.php/payroll/simulation/go",
                             type: "get", //send it through get method
                             timeout : 0,
                             data: { 
@@ -505,7 +505,8 @@ class simulation extends CI_Controller {
         $paramAPI['date_payroll']=$this->input->get('date_payroll');
         $data = http_build_query($paramAPI);
         $curl = curl_init();
-        $url = 'http://10.229.207.148:8001/payroll/simulation'."?".$data;
+        // $url = 'http://10.229.207.148:8001/payroll/simulation'."?".$data;
+        $url = $this->config->item('base_url_engine_payroll').'/payroll/simulation'."?".$data;
 //        if($this->session->userdata('username')=='mafulum'){
 //            $url = 'http://localhost:8801/payroll/simulation'."?".$data;
 //        }
