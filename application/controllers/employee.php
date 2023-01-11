@@ -3086,5 +3086,129 @@ AND o.OBJID NOT IN(SELECT PLANS FROM tm_emp_org WHERE CURDATE() BETWEEN BEGDA AN
         $id = $this->input->post('id');
         echo $this->emp_sup_matriks_m->check_time_constraint($pernr, $begda, $endda, $subty, "UPDATE", $id);
     }
+
+    
+    function emp_quota($sNopeg) {
+        if (!$this->form_validation->validate($sNopeg, 'required|numeric|max_length[8]|xss_clean')) {
+            redirect('employee/master', 'refresh');
+        } else {
+            $this->load->model('pa/emp_quota_m');
+            $data = $this->emp_quota_m->quota_ov($sNopeg);
+            $this->load->view('main', $data);
+        }
+    }
+    
+    function emp_quota_view($sNopeg = "", $iSeq = 0) {
+        $this->load->model('pa/emp_quota_m');
+        $data = $this->emp_quota_m->view($iSeq, $sNopeg);
+        $this->load->view('main', $data);
+    }
+
+    function emp_quota_fr($sNopeg = "", $iSeq = 0) {
+        $this->load->model('pa/emp_quota_m');
+        if (!empty($iSeq) && !empty($sNopeg)) {
+            $data = $this->emp_quota_m->emp_quota_fr_update($iSeq, $sNopeg);
+            $this->load->view('main', $data);
+        } else if (!empty($sNopeg)) {
+            $data = $this->emp_quota_m->emp_quota_fr_new($sNopeg);
+            $this->load->view('main', $data);
+        } else {
+            redirect('employee/master', 'refresh');
+        }
+    }
+
+    function emp_quota_upd() {
+        if ($this->input->post()) {
+            $this->form_validation->set_rules('id', 'id', 'trim|required|numeric');
+            $this->form_validation->set_rules('pernr', 'pernr', 'trim|required');
+            $this->form_validation->set_rules('begda', 'begda', 'trim|required');
+            $this->form_validation->set_rules('endda', 'endda', 'trim|required');
+            $this->form_validation->set_rules('subty', 'subty', 'trim|required');
+            $this->form_validation->set_rules('quota', 'quota', 'trim|required');
+            $this->form_validation->set_rules('note', 'note', 'trim|required');
+            if ($this->form_validation->run()) {
+                $this->load->model('pa/emp_quota_m');
+                $id = $this->input->post('id');
+                $pernr = $this->input->post('pernr');
+                $a['BEGDA'] = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('begda'));
+                $a['ENDDA'] = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('endda'));
+                $a['SUBTY'] = $this->input->post('SUBTY');
+                $a['QUOTA'] = $this->input->post('QUOTA');
+                $a['NOTE'] = $this->input->post('note');
+                $this->emp_quota_m->emp_quota_upd($id, $pernr, $a);
+                redirect('employee/emp_quota/' . $pernr, 'refresh');
+            } else
+                redirect('employee/master', 'refresh');
+        } else {
+            redirect('employee/master', 'refresh');
+        }
+    }
+
+    function emp_quota_new() {
+        if ($this->input->post()) {
+            $this->form_validation->set_rules('pernr', 'pernr', 'trim|required');
+            $this->form_validation->set_rules('begda', 'begda', 'trim|required');
+            $this->form_validation->set_rules('endda', 'endda', 'trim|required');
+            $this->form_validation->set_rules('subty', 'subty', 'trim|required');
+            $this->form_validation->set_rules('quota', 'quota', 'trim|required');
+            $this->form_validation->set_rules('note', 'note', 'trim|required');
+            if ($this->form_validation->run()) {
+                $this->load->model('pa/emp_quota_m');
+                $a['PERNR'] = $pernr = $this->input->post('pernr');
+                $a['BEGDA'] = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('begda'));
+                $a['ENDDA'] = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('endda'));
+                $a['SUBTY'] = $this->input->post('subty');
+                $a['QUOTA'] = $this->input->post('quota');
+                $a['NOTE'] = $this->input->post('note');
+                $oRes = $this->emp_quota_m->check_time_constraint_emp_quota($a['PERNR'], $a['BEGDA'], $a['ENDDA'], $a['SUBTY'], "CHECK");
+                if (!empty($oRes) && $oRes != 'null' && $oRes->num_rows() > 0) {
+                    $sQuery = "DELETE FROM tm_emp_quota where PERNR='" . $a['PERNR'] . "' AND SUBTY='" . $a['SUBTY'] . "' AND BEGDA>='" . $a['BEGDA'] . "' AND ENDDA<='" . $a['ENDDA'] . "'";
+                    $this->db->query($sQuery);
+                    $this->global_m->insert_log_delete('tm_emp_quota',$sQuery);
+                    $oRes = $this->emp_motask_m->check_time_constraint_emp_quota($a['PERNR'], $a['BEGDA'], $a['ENDDA'], $a['SUBTY'], "CHECK");
+                }
+                if (!empty($oRes) && $oRes != 'null' && $oRes->num_rows() == 1) {
+                    $aRow = $oRes->row_array();
+                    $sQuery = "SELECT DATE_SUB('" . $a['BEGDA'] . "',INTERVAL 1 DAY) ival";
+                    $oRes = $this->db->query($sQuery);
+                    $aX = $oRes->row_array();
+                    $sQuery = "UPDATE tm_emp_quota SET ENDDA='" . $aX['ival'] . "',updated_by = '".$this->session->userdata('username')."' WHERE id='" . $aRow['id'] . "' AND SUBTY='" . $a['SUBTY'] . "' ;";
+                    $this->db->query($sQuery);
+                }
+                $this->emp_quota_m->emp_quota_new($a);
+                redirect('employee/emp_quota/' . $pernr, 'refresh');
+            } else {
+                redirect('employee/master', 'refresh');
+            }
+        } else {
+            redirect('employee/master', 'refresh');
+        }
+    }
+
+    function emp_quota_del($sNopeg, $id) {
+        $this->load->model('pa/emp_quota_m');
+        $this->emp_quota_m->emp_quota_del($id, $sNopeg);
+        redirect('employee/emp_quota/' . $sNopeg, 'refresh');
+    }
+
+    function insert_check_time_constraint_emp_quota() {
+        $this->load->model('pa/emp_quota_m');
+        $pernr = $this->input->post('pernrX');
+        $subty = $this->input->post('subtyX');
+        $begda = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('begdaX'));
+        $endda = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('enddaX'));
+        echo $this->emp_quota_m->check_time_constraint_emp_quota($pernr, $begda, $endda, $subty, "INSERT");
+    }
+
+    function update_check_time_constraint_emp_quota() {
+        $this->load->model('pa/emp_quota_m');
+        $pernr = $this->input->post('pernrX');
+        $subty = $this->input->post('subtyX');
+        $begda = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('begdaX'));
+        $endda = $this->global_m->convert_ddmmyyyy_yyyymmdd($this->input->post('enddaX'));
+        $id = $this->input->post('id');
+        echo $this->emp_quota_m->check_time_constraint_emp_monitoring($pernr, $begda, $endda, $subty, "UPDATE", $id);
+    }
+
 }
 ?>
