@@ -3,7 +3,7 @@
         <!--widget start-->
         <section class="panel">
             <header class="panel-heading">
-                Monitoring of Task
+                Employee Quota
             </header>
             <div class="panel-body">
                 <div class="form-group">

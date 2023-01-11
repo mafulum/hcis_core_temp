@@ -3,7 +3,7 @@
         <!--widget start-->
         <section class="panel">
             <header class="panel-heading">
-                Monitoring of Task
+                Employee Quota
             </header>
             <div class="panel-body">
                 <form class="form-horizontal" role="form"  action="<?php echo $base_url; ?>index.php/employee/emp_quota_upd" method="post" id="pd_quota_fr_update" name="pd_quota_fr_update">
