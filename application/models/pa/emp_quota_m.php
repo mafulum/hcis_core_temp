@@ -84,7 +84,7 @@ class emp_quota_m extends CI_Model {
     
     function view($iSeq, $sNopeg){
         $data['frm'] = $this->get_tm_emp_quota_row($iSeq, $sNopeg);
-        $data['mot'] = $this->common->get_abbrev(30);
+        $data['subty'] = $this->common->get_abbrev(30);
         $data = $this->employee_m->get_default_data($data, $sNopeg);
         $data['base_url'] = $this->config->item('base_url');
         $data['view'] = 'employee/home';
