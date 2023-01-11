@@ -5,7 +5,7 @@
             <header class="panel-heading">
                 Monitoring Of Task
                 <?php if($this->common->check_permission('EmployeeMasterData.Organization.MonitoringOfTask.Maintain')){ ?>
-                <a class="btn btn-danger btn-xs pull-right" href="<?= base_url(); ?>index.php/employee/emp_monitoring_fr/<?php echo $this->global_m->get_array_data($master_emp, "PERNR"); ?>" data-toggle="modal"> <i class="fa fa-plus"></i> </a>
+                <a class="btn btn-danger btn-xs pull-right" href="<?= base_url(); ?>index.php/employee/emp_quota_fr/<?php echo $this->global_m->get_array_data($master_emp, "PERNR"); ?>" data-toggle="modal"> <i class="fa fa-plus"></i> </a>
                 <?php } ?>
             </header>
             <table class="table table-striped table-hover">
