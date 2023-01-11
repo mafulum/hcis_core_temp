@@ -107,7 +107,7 @@
                             <?php } if($this->common->check_permission('EmployeeMasterData.Time.Overtime')){ ?>
                             <li><a href="<?php echo base_url() . "index.php/memp_tms/personal_overtime/" . $this->global_m->get_array_data($master_emp, "PERNR"); ?>"> <i class="fa fa-caret-square-o-right"></i> Overtime</a></li>
                             <?php } if($this->common->check_permission('EmployeeMasterData.Time.LeaveQuota')){ ?>
-                            <li><a href="#"> <i class="fa fa-caret-square-o-right"></i> Leave Quota</a></li>
+                            <li><a href="<?php echo base_url() . "index.php/employee/emp_quota/" . $this->global_m->get_array_data($master_emp, "PERNR"); ?>"> <i class="fa fa-caret-square-o-right"></i> Quota</a></li>
                             <?php } if($this->common->check_permission('EmployeeMasterData.Time.OvertimeQuota')){ ?>
                             <li><a href="#"> <i class="fa fa-caret-square-o-right"></i> Overtime Quota</a></li>
                             <?php } ?>

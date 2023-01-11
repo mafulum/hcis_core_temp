@@ -172,6 +172,14 @@
             </a>
         </li>
         <?php } ?>
+        <?php if($this->common->check_permission('MassUpload.EmpData')) { ?>
+        <li class="sub-menu">
+            <a <?php if($this->uri->segment(2) == 'emp_quota') echo 'class="active"'; ?> href="<?php echo base_url() . "index.php/upload/emp_quota"; ?>">
+                <i class="fa fa-table"></i>
+                <span>Emp Quota</span>
+            </a>
+        </li>
+        <?php } ?>
     </ul>
     <!-- sidebar menu end-->
 </div>

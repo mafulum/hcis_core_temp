@@ -10,67 +10,59 @@
  *
  * @author Garuda
  */
-class emp_motask_m extends CI_Model {
+class emp_quota_m extends CI_Model {
 
     function __construct() {
         parent::__construct();
         $this->load->model('employee_m');
     }
     
-    function get_a_motask_data($sNopeg){
-        $sQuery = "SELECT motask.*, SUBTY,STEXT FROM "
-                . "(SELECT * FROM tm_emp_motask WHERE PERNR='" . $sNopeg . "') motask "
-                . "JOIN (SELECT * FROM tm_master_abbrev WHERE SUBTY='29') abbrv ON motask.REMINDER_TYPE=abbrv.SHORT";
+    function get_a_quota_data($sNopeg){
+        $sQuery = "SELECT quota.*, SUBTY,STEXT FROM "
+                . "(SELECT * FROM tm_emp_quota WHERE PERNR='" . $sNopeg . "') quota "
+                . "JOIN (SELECT * FROM tm_master_abbrev WHERE SUBTY='30') abbrv ON quota.SUBTY=abbrv.SHORT";
         $oRes = $this->db->query($sQuery);
         $aRes = $oRes->result_array();
         $oRes->free_result();
         return $aRes;
     }
     
-    function get_master_bank(){
-        $sQuery = "SELECT bank_mid,BANK_NAME FROM tm_master_bank WHERE CURDATE() BETWEEN BEGDA AND ENDDA";
-        $oRes = $this->db->query($sQuery);
-        $aRes = $oRes->result_array();
-        $oRes->free_result();
-        return $aRes;
-    }
-    
-    function emp_monitoring_fr_new($sNopeg){
+    function emp_quota_fr_new($sNopeg){
         $data = $this->employee_m->get_default_data(array(), $sNopeg);
-        $data['mot'] = $this->common->get_abbrev(29);
+        $data['subty'] = $this->common->get_abbrev(30);
         $data['base_url'] = $this->config->item('base_url');
         $data['view'] = 'employee/home';
-        $data['emp_view'] = 'employee/pa/monitoring_fr_new';
+        $data['emp_view'] = 'employee/pa/quota_fr_new';
         $data['scriptJS'] .='
             <script>
             var modalAnswer="0";
             jQuery(document).ready(function() {
-                $("#pd_mot_fr_new").validate({
+                $("#pd_quota_fr_new").validate({
                     rules: {
                         begda: "required",
                         endda: "required",
-                        mot: "required",
-                        motda: "required"
+                        subty: "required",
+                        quota: "required"
                     },
                     messages: {
                         begda: "Please enter Begin Date",
                         endda: "Please enter End Date",
-                        mot: "Please enter Reminder Type",
-                        motda: "Please enter Reminder Date"
+                        subty: "Please enter Quota Type",
+                        quota: "Please enter Quota"
                     },submitHandler: function() {
                     //check date
                         pernr = $("#pernr").val();
                         begda = $("#begda").val();
                         endda = $("#endda").val();
-                        mot = $("#mot").val();
-                        $.post( "'.base_url().'index.php/employee/insert_check_time_constraint_emp_monitoring", { "pernrX": pernr,"begdaX": begda, "enddaX": endda,"motX":mot },function (text){
+                        subty = $("#subty").val();
+                        $.post( "'.base_url().'index.php/employee/insert_check_time_constraint_emp_quota", { "pernrX": pernr,"begdaX": begda, "enddaX": endda,"subtyX":subty },function (text){
                             if(text!="null"){
                                 $("#mb").html(text);
                             }
                         }).done(function() {
                             $("#confirm-insert").modal("show").on("hidden.bs.modal", function (e) {
                                 if(modalAnswer=="1"){
-                                    $("#pd_mot_fr_new")[0].submit();
+                                    $("#pd_quota_fr_new")[0].submit();
                                 }
                             });
                         });
@@ -91,46 +83,47 @@ class emp_motask_m extends CI_Model {
     }
     
     function view($iSeq, $sNopeg){
-        $data['frm'] = $this->get_tm_emp_monitoring_row($iSeq, $sNopeg);
-        $data['mot'] = $this->common->get_abbrev(29);
+        $data['frm'] = $this->get_tm_emp_quota_row($iSeq, $sNopeg);
+        $data['mot'] = $this->common->get_abbrev(30);
         $data = $this->employee_m->get_default_data($data, $sNopeg);
         $data['base_url'] = $this->config->item('base_url');
         $data['view'] = 'employee/home';
-        $data['emp_view'] = 'employee/pa/monitoring_view';
+        $data['emp_view'] = 'employee/pa/quota_view';
         return $data;
     }
     
     function emp_monitoring_fr_update($iSeq, $sNopeg){
-        $data['frm'] = $this->get_tm_emp_monitoring_row($iSeq, $sNopeg);
-        $data['mot'] = $this->common->get_abbrev(29);
+        $data['frm'] = $this->get_tm_emp_quota_row($iSeq, $sNopeg);
+        $data['subty'] = $this->common->get_abbrev(30);
         $data = $this->employee_m->get_default_data($data, $sNopeg);
         $data['base_url'] = $this->config->item('base_url');
         $data['view'] = 'employee/home';
-        $data['emp_view'] = 'employee/pa/monitoring_fr_update';
+        $data['emp_view'] = 'employee/pa/quota_fr_update';
         $data['scriptJS'] .='
 <script>
 var modalAnswer="0";
 jQuery(document).ready(function() {
-    $("#pd_mot_fr_update").validate({
+    $("#pd_quota_fr_update").validate({
             rules: {
                 begda: "required",
                 endda: "required",
-                mot: "required",
-                motda: "required"
+                subty: "required",
+                quota: "required"
             },
             messages: {
                 begda: "Please enter Begin Date",
                 endda: "Please enter End Date",
-                mot: "Please enter Reminder Type",
-                motda: "Please enter Reminder Date"
+                subty: "Please enter Quota Type",
+                quota: "Please enter Quota"
             },submitHandler: function() {
                      //check date
                         pernr = $("#pernr").val();
                         begda = $("#begda").val();
                         endda = $("#endda").val();
-                        mot = $("#mot").val();
+                        subty = $("#subty").val();
+                        quota = $("#quota").val();
                         id= $("#id").val();
-                        $.post( "'.base_url().'index.php/employee/update_check_time_constraint_emp_monitoring", { "pernrX": pernr,"begdaX": begda, "enddaX": endda,"motX":mot ,"id":id},function (text){
+                        $.post( "'.base_url().'index.php/employee/update_check_time_constraint_emp_quota", { "pernrX": pernr,"begdaX": begda, "enddaX": endda,"subtyX":subty ,"id":id},function (text){
                             if(text!="null"){
                                 $("#mb").html(text);
                                 $("#btnYes").hide();
@@ -141,7 +134,7 @@ jQuery(document).ready(function() {
                         }).done(function() {
                             $("#confirm-update").modal("show").on("hidden.bs.modal", function (e) {
                                 if(modalAnswer=="1"){
-                                    $("#pd_mot_fr_update")[0].submit();
+                                    $("#pd_quota_fr_update")[0].submit();
                                 }
                             });
                         });
@@ -162,13 +155,13 @@ jQuery(document).ready(function() {
         
     }
 
-    function motask_ov($sNopeg) {
-        $data['ov'] = $this->get_a_motask_data($sNopeg);
+    function quota_ov($sNopeg) {
+        $data['ov'] = $this->get_a_quota_data($sNopeg);
         $data = $this->employee_m->get_default_data($data, $sNopeg);
         $data['aCon'] = $data;
         $data['base_url'] = $this->config->item('base_url');
         $data['view'] = 'employee/home';
-        $data['emp_view'] = 'employee/pa/monitoring_ov';
+        $data['emp_view'] = 'employee/pa/quota_ov';
         $data['scriptJS'] .='
         <script>
         var modalAnswer="0";
@@ -194,9 +187,9 @@ jQuery(document).ready(function() {
         return $data;
     }
     
-    function check_time_constraint_emp_monitoring($pernr,$begda,$endda,$mot,$type="INSERT",$id=0){
+    function check_time_constraint_emp_quota($pernr,$begda,$endda,$subty,$type="INSERT",$id=0){
         if($type=="INSERT"){
-            $sQuery="SELECT * from tm_emp_motask where PERNR='$pernr' AND REMINDER_TYPE='$mot' AND((BEGDA<='$begda' AND ENDDA>='$begda') OR (BEGDA<='$endda' AND ENDDA>='$endda'))";
+            $sQuery="SELECT * from tm_emp_quota where PERNR='$pernr' AND SUBTY='$subty' AND((BEGDA<='$begda' AND ENDDA>='$begda') OR (BEGDA<='$endda' AND ENDDA>='$endda'))";
             $oRes = $this->db->query($sQuery);
             $nRows = $oRes->num_rows();
             if($nRows==0){
@@ -208,7 +201,7 @@ jQuery(document).ready(function() {
                 return "your input had time constraint with ".$nRows." row , do you want overwrite (can cause delete some row) ?";
             }
         }else if($type=="UPDATE"){
-            $sQuery="SELECT * from tm_emp_motask where PERNR='$pernr' AND REMINDER_TYPE='$mot' AND ((BEGDA<='$begda' AND ENDDA>='$begda')  OR (BEGDA>='$begda') OR (BEGDA<='$endda' AND ENDDA>='$endda')) AND id<>'$id'";
+            $sQuery="SELECT * from tm_emp_quota where PERNR='$pernr' AND SUBTY='$subty' AND ((BEGDA<='$begda' AND ENDDA>='$begda')  OR (BEGDA>='$begda') OR (BEGDA<='$endda' AND ENDDA>='$endda')) AND id<>'$id'";
             $oRes = $this->db->query($sQuery);
             $nRows = $oRes->num_rows();
             if($nRows==0){
@@ -217,33 +210,33 @@ jQuery(document).ready(function() {
                 return "your input had time constraint, please back and check your data period. Thank you.";
             }
         }else if($type=="CHECK"){
-            $sQuery="SELECT * from tm_emp_motask where PERNR='$pernr' AND REMINDER_TYPE='$mot' AND ((BEGDA<='$begda' AND ENDDA>='$begda') OR (BEGDA<='$endda' AND ENDDA>='$endda')) AND id<>'$id'";
+            $sQuery="SELECT * from tm_emp_quota where PERNR='$pernr' AND SUBTY='$subty' AND ((BEGDA<='$begda' AND ENDDA>='$begda') OR (BEGDA<='$endda' AND ENDDA>='$endda')) AND id_emp_bank<>'$id'";
             $oRes = $this->db->query($sQuery);
             return $oRes;
         }
     }
 
-    function emp_monitoring_upd($id, $sNopeg, $a) {
+    function emp_quota_upd($id, $sNopeg, $a) {
         $this->db->where('id', $id);
         $this->db->where('pernr', $sNopeg);
         $a['updated_by'] = $this->session->userdata('username');
-        $this->db->update('tm_emp_motask', $a);
+        $this->db->update('tm_emp_quota', $a);
     }
 
-    function emp_monitoring_new($a) {
+    function emp_quota_new($a) {
         $a['created_by'] = $this->session->userdata('username');
-        $this->db->insert('tm_emp_motask', $a);
+        $this->db->insert('tm_emp_quota', $a);
     }
 
-    function emp_monitoring_del($id, $sNopeg) {
+    function emp_quota_del($id, $sNopeg) {
         $this->db->where('id', $id);
         $this->db->where('PERNR', $sNopeg);
-        $this->db->delete('tm_emp_motask');
-        $this->global_m->insert_log_delete('tm_emp_motask',array('PERNR'=> $sNopeg,'id'=>$id));
+        $this->db->delete('tm_emp_quota');
+        $this->global_m->insert_log_delete('tm_emp_quota',array('PERNR'=> $sNopeg,'id'=>$id));
     }
     
-    function get_tm_emp_monitoring_row($iSeq, $sNopeg) {
-        $sQuery = "SELECT * FROM tm_emp_motask where pernr='" . $sNopeg . "' AND id='" . $iSeq . "'";
+    function get_tm_emp_quota_row($iSeq, $sNopeg) {
+        $sQuery = "SELECT * FROM tm_emp_quota where pernr='" . $sNopeg . "' AND id='" . $iSeq . "'";
         $oRes = $this->db->query($sQuery);
         $aRow = $oRes->row_array();
         $oRes->free_result();
@@ -252,18 +245,18 @@ jQuery(document).ready(function() {
     
     function reff_upload_page(){
         $data['base_url'] = $this->config->item('base_url');
-        $data['view'] = 'upload/PA_MONTASK';
+        $data['view'] = 'upload/PA_QUOTA';
         return $data;
     }
     
-    function getReminderByDate($date){
-        $sQuery = "SELECT * FROM tm_emp_motask where REMINDER_DATE='" . $date . "'";
-        $oRes = $this->db->query($sQuery);
-        $aRow = $oRes->result_array();
-        $oRes->free_result();
-        return $aRow;
+    // function getReminderByDate($date){
+    //     $sQuery = "SELECT * FROM tm_emp_quota where REMINDER_DATE='" . $date . "'";
+    //     $oRes = $this->db->query($sQuery);
+    //     $aRow = $oRes->result_array();
+    //     $oRes->free_result();
+    //     return $aRow;
         
-    }
+    // }
 }
 
 ?>
