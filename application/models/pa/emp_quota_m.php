@@ -18,10 +18,9 @@ class emp_quota_m extends CI_Model {
     }
     
     function get_a_quota_data($sNopeg){
-        $sQuery = "SELECT quota.*, SUBTY,STEXT FROM "
+        $sQuery = "SELECT quota.*, abbrv.SUBTY,abbrv.STEXT FROM "
                 . "(SELECT * FROM tm_emp_quota WHERE PERNR='" . $sNopeg . "') quota "
                 . "JOIN (SELECT * FROM tm_master_abbrev WHERE SUBTY='30') abbrv ON quota.SUBTY=abbrv.SHORT";
-        die($sQuery);
         $oRes = $this->db->query($sQuery);
         $aRes = $oRes->result_array();
         $oRes->free_result();
