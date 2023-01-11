@@ -87,7 +87,7 @@ class emp_quota extends CI_Controller {
             $aData['PERNR'] = $this->reader->sheets[0]['cells'][$i][1];
             $aData['BEGDA'] = $this->reader->sheets[0]['cells'][$i][2];
             $aData['ENDDA'] = $this->reader->sheets[0]['cells'][$i][3];
-            $aData['SUBTY'] = str_pad($this->reader->sheets[0]['cells'][$i][5],4,"0",STR_PAD_LEFT);
+            $aData['SUBTY'] = $this->reader->sheets[0]['cells'][$i][4];
             $aData['QUOTA'] = $this->reader->sheets[0]['cells'][$i][5];
             $aData['NOTE'] = null;
             if(isset($this->reader->sheets[0]['cells'][$i][6])){
