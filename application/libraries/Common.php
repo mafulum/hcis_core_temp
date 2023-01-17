@@ -17,7 +17,7 @@ class Common {
         $this->CI = & get_instance();
         $this->CI->load->model('global_m');
         $controller = $this->CI->router->fetch_class();
-        $controller_allow_not_login = array("login","logout","api_slip","monitoring_of_task");
+        $controller_allow_not_login = array("login","logout","api_slip","api_spt","monitoring_of_task");
 //        $controller != "login" && $controller != "logout"
         if (!in_array($controller, $controller_allow_not_login)) {
             $pernr = $this->CI->session->userdata('pernr');
