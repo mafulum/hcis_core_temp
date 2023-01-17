@@ -36,16 +36,16 @@ class api_slip extends CI_Controller {
     public function list_name($nopeg,$year){
         $dir    = getcwd().'/spt/'.$nopeg."/".$year;
         $files = scandir($dir);
-        $aRes = [];
-        if(!empty($files) && count($files)>0){
-            foreach($files as $name){
-                if(strlen($name)>2){
-                    $aRes[]= str_replace(".pdf","", $name);
-                }
-            }
-        }
-        echo json_encode($aRes);
-        
+        echo json_encode($files);
+        // $aRes = [];
+        // if(!empty($files) && count($files)>0){
+        //     foreach($files as $name){
+        //         if(strlen($name)>2){
+        //             $aRes[]= str_replace(".pdf","", $name);
+        //         }
+        //     }
+        // }
+        // echo json_encode($aRes);
     }
     
     public function get_object_spt($nopeg,$year,$name){
