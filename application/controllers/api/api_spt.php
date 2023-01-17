@@ -35,8 +35,9 @@ class api_slip extends CI_Controller {
     
     public function list_name($nopeg,$year){
         $dir    = getcwd().'/spt/'.$nopeg."/".$year;
-        $files = scandir($dir);
-        echo json_encode($files);
+        die($dir);
+        // $files = scandir($dir);
+        // echo json_encode($files);
         // $aRes = [];
         // if(!empty($files) && count($files)>0){
         //     foreach($files as $name){
