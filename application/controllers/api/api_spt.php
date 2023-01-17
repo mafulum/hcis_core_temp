@@ -46,7 +46,7 @@ class api_slip extends CI_Controller {
         
     }
     
-    public function get_object_slip($nopeg,$year,$name){
+    public function get_object_spt($nopeg,$year,$name){
         $filename    = getcwd().'/spt/'.$nopeg."/".$year."/".$name.".pdf";
         $obj="";
         if(is_file($filename)){
