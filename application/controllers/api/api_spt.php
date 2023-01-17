@@ -37,9 +37,11 @@ class api_slip extends CI_Controller {
         $dir    = getcwd().'/spt/'.$nopeg."/".$year;
         $files = scandir($dir);
         $aRes = [];
-        foreach($files as $name){
-            if(strlen($name)>2){
-                $aRes[]= str_replace(".pdf","", $name);
+        if(!empty($files) && count($files)>0){
+            foreach($files as $name){
+                if(strlen($name)>2){
+                    $aRes[]= str_replace(".pdf","", $name);
+                }
             }
         }
         echo json_encode($aRes);
