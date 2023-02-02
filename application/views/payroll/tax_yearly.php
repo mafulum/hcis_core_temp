@@ -10,9 +10,9 @@
             <div class="panel-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label for="fnik" class="col-lg-2 col-sm-2 control-label">Period of Regular</label>
+                        <label for="fnik" class="col-lg-2 col-sm-2 control-label">Year</label>
                         <div class="col-md-3 col-xs-11">
-                            <div data-date-minviewmode="months" data-date-viewmode="years" data-date-format="yyyy" data-date=""  class="input-append date dpMonths" id="cPeriodRegular">
+                            <div data-date-minviewmode="months" data-date-viewmode="years" data-date-format="yy" data-date=""  class="input-append date Months" id="cPeriodRegular">
                                 <input type="text" value="" size="16" class="form-control" id="fPeriodRegular" name="fPeriodRegular">
                                     <span class="input-group-btn add-on">
                                       <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
