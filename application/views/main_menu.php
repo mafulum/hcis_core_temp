@@ -97,6 +97,8 @@ $aModule = $this->common->get_module_access();
                 <li><a href="<?php echo base_url() . "index.php/payroll/document_transfer"; ?>">Bank Transfer Document</a></li>
                 <?php } if($this->common->check_permission('PayrollMenu.SlipGaji')){ ?>
                 <li><a href="<?php echo base_url() . "index.php/payroll/slip_gaji"; ?>">Slip Gaji</a></li>
+                <?php } if($this->common->check_permission('PayrollMenu.Simulation')){ ?>
+                <li><a href="<?php echo base_url() . "index.php/payroll/tax_yearly"; ?>">Tax Yearly</a></li>
                 <?php } ?>
             </ul>
         </li>  
