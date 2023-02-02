@@ -41,7 +41,7 @@ class tax_yearly extends CI_Controller {
         // $aPERSK = $this->employee_m->get_persk();
 //        $sAddUlum = "";
 //        if($this->session->userdata('username')=='mafulum'){
-            $sAddUlum = ',date_payroll: $("#fDateOfPayment").val()';
+            // $sAddUlum = ',date_payroll: $("#fDateOfPayment").val()';
 //        }
         $data['scriptJS'] = '<script type="text/javascript">
 		function format(item) {
