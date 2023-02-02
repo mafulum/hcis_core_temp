@@ -134,10 +134,10 @@ class tax_yearly extends CI_Controller {
     public function go() {
         set_time_limit(0);
         ini_set("max_execution_time",3600);
-        $paramAPI['year']=$this->input->get('year');
+        $paramAPI['year']=substr($this->input->get('year'),0,4);
         
 //        $data = http_build_query($paramAPI);
-        $paramAPI['date_payroll']=$this->input->get('date_payroll');
+        // $paramAPI['date_payroll']=$this->input->get('date_payroll');
         $data = http_build_query($paramAPI);
         $curl = curl_init();
         // $url = 'http://10.229.207.148:8001/payroll/simulation'."?".$data;
