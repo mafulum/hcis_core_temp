@@ -123,9 +123,7 @@ class tax_yearly extends CI_Controller {
                         });
                     });
                     $("#cPeriodRegular").datepicker({
-                        format: "yyyy",
-                        viewMode: "years", 
-                        minViewMode: "years"
+                        autoclose: true
                     });
                     $("[data-toggle=\'switch\']").wrap(\'<div class="switch" />\').parent().bootstrapSwitch();
 		});
