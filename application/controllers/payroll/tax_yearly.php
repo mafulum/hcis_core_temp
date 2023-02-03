@@ -67,6 +67,8 @@ class tax_yearly extends CI_Controller {
 
                     oTablePayrollTax = $("#dynamic-table-payroll-tax").dataTable({
                         aoColumns: [
+                            { mData: "PERSG"},
+                            { mData: "PERSK"},
                             { mData: "ABKRS"},
                             { mData: "PERNR"},
                             { mData: "BEGDA"},
@@ -111,7 +113,7 @@ class tax_yearly extends CI_Controller {
                             success: function(response) {
                                 setTimeout($.unblockUI, 500);
                                 oTablePayrollTax.fnClearTable();
-                                oTablePayrollTax.fnAddData(response.content.payroll_tax);
+                                oTablePayrollTax.fnAddData(response.content.tax);
                             },
                             error: function(xhr) {
                               //Do Something to handle error

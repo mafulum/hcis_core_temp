@@ -47,12 +47,14 @@
                                 <th class="all">ABKRS</th>
                                 <th class="all">Nopeg</th>
                                 <th class="all">Begda</th>
-                                <th class="all">ENdda</th>
+                                <th class="all">Endda</th>
                                 <th class="all">WGTYP</th>
                                 <th class="all">LGTXT</th>
                                 <th class="all">PRTYP</th>
                                 <th class="all">TNAME</th>
                                 <th class="all">WAMNT</th>
+                                <th class="all">start_date_payroll</th>
+                                <th class="all">end_date_payroll</th>
                             </tr>
                         </thead>
                         <tbody>
