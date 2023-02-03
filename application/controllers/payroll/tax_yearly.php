@@ -104,7 +104,7 @@ class tax_yearly extends CI_Controller {
                             vis_reg = "off";
                         }
                         $.ajax({
-                            url: "'. base_url().'index.php/payroll/simulation/go",
+                            url: "'. base_url().'index.php/payroll/tax_yearly/go",
                             type: "get", //send it through get method
                             timeout : 0,
                             data: { 
