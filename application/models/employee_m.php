@@ -775,9 +775,9 @@ jQuery(document).ready(function() {
         // exit;
         $a['created_by'] = $this->session->userdata('username');
         $this->db->insert('tm_master_emp', $a);
-        $errNo   = $this->db->_error_number();
-        $errMess = $this->db->_error_message();
-        var_dump([$errNo,$errMess]);
+        // $errNo   = $this->db->_error_number();
+        // $errMess = $this->db->_error_message();
+        // var_dump([$errNo,$errMess]);
         // echo $errNo;
         // echo ""
 //        $this->load->model('gen_machine');
