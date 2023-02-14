@@ -777,7 +777,7 @@ jQuery(document).ready(function() {
         $this->db->insert('tm_master_emp', $a);
         $errNo   = $this->db->_error_number();
         $errMess = $this->db->_error_message();
-        dd([$errNo,$errMess]);
+        var_dump([$errNo,$errMess]);
         // echo $errNo;
         // echo ""
 //        $this->load->model('gen_machine');
