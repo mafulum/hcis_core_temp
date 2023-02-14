@@ -771,6 +771,8 @@ jQuery(document).ready(function() {
     }
 
     function personal_data_new($a) {
+        var_dump($a);
+        exit;
         $a['created_by'] = $this->session->userdata('username');
         $this->db->insert('tm_master_emp', $a);
 //        $this->load->model('gen_machine');
