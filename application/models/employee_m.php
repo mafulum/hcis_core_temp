@@ -771,10 +771,15 @@ jQuery(document).ready(function() {
     }
 
     function personal_data_new($a) {
-        var_dump($a);
-        exit;
+        // var_dump($a);
+        // exit;
         $a['created_by'] = $this->session->userdata('username');
         $this->db->insert('tm_master_emp', $a);
+        $errNo   = $this->db->_error_number();
+        $errMess = $this->db->_error_message();
+        dd([$errNo,$errMess]);
+        // echo $errNo;
+        // echo ""
 //        $this->load->model('gen_machine');
 //        $this->gen_machine->save_to_trigger($this->gen_machine->STYPE_AGE,$a['PERNR']);
     }
