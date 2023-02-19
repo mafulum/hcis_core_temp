@@ -386,10 +386,10 @@ class slip_gaji extends CI_Controller {
                 if (empty($arr_con_slip['+'][$i])) {
                     $aslip = $aslipDefault;
                 } else {
-                    $aslip = $$arr_con_slip['+'][$i];
+                    $aslip = $arr_con_slip['+'][$i];
                     $sumPlus +=$aslip[5];
                 }
-                $pdf->Cell(60, 5, $aslip[3], 1, 0, 'L');
+                $pdf->Cell(60, 5, $aslip[2], 1, 0, 'L');
                 $pdf->Cell(28, 5, $aslip[5], 1, 0, 'R');
                 
                 if (empty($arr_con_slip['-'][$i])) {
@@ -398,7 +398,7 @@ class slip_gaji extends CI_Controller {
                     $aslip = $arr_con_slip['-'][$i];
                     $sumMinus +=$aslip[5];
                 }
-                $pdf->Cell(60, 5, $aslip[3], 1, 0, 'L');
+                $pdf->Cell(60, 5, $aslip[2], 1, 0, 'L');
                 $pdf->Cell(28, 5, $aslip[5], 1, 0, 'R');
                 if (empty($arr_con_slip['#'][$i])) {
                     $aslip = $aslipDefault;
@@ -406,7 +406,7 @@ class slip_gaji extends CI_Controller {
                     $aslip = $arr_con_slip['#'][$i];
                     $sumComp +=$aslip[5];
                 }
-                $pdf->Cell(60, 5, $aslip[3], 1, 0, 'L');
+                $pdf->Cell(60, 5, $aslip[2], 1, 0, 'L');
                 $pdf->Cell(28, 5, $aslip[5], 1, 1, 'R');
             }
             $pdf->Cell(60, 5, "Jumlah : ", 1, 0, 'R');
