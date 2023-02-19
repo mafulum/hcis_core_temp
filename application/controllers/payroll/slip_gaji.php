@@ -345,6 +345,7 @@ class slip_gaji extends CI_Controller {
             $arr_det_period_nopeg[$det[0].$det[1]][$det[3]][]=$det;
         }
         foreach($arr_emp as $emp){
+            var_dump($emp);
             // sort($arr_det_period_nopeg[$emp[0].$emp[1]]['+']);
             // sort($arr_det_period_nopeg[$emp[0].$emp[1]]['-']);
             // sort($arr_det_period_nopeg[$emp[0].$emp[1]]['#']);
