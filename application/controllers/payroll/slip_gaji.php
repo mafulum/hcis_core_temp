@@ -350,7 +350,7 @@ class slip_gaji extends CI_Controller {
         foreach($arr_emp as $emp){
             var_dump($emp);
             echo "<br/>";
-            var_dump($arr_det_period_nopeg[$emp[0]][$emp[1]]);
+            var_dump($arr_det_period_nopeg[$emp[0]]);
             $max_line_slip = max(count($arr_det_period_nopeg[$emp[0]][$emp[1]]['+']), count($arr_det_period_nopeg[$emp[0]][$emp[1]]['-']), count($arr_det_period_nopeg[$emp[0]][$emp[1]]['#']));
             var_dump($arr_det_period_nopeg[$emp[0]][$emp[1]]);
             exit;
