@@ -349,6 +349,7 @@ class slip_gaji extends CI_Controller {
             // sort($arr_det_period_nopeg[$emp[0].$emp[1]]['+']);
             // sort($arr_det_period_nopeg[$emp[0].$emp[1]]['-']);
             // sort($arr_det_period_nopeg[$emp[0].$emp[1]]['#']);
+            $arr_con_slip = $arr_det_period_nopeg[$emp[0].$emp[1]];
             $max_line_slip = max(count($arr_det_period_nopeg[$emp[0].$emp[1]]['+']), count($arr_det_period_nopeg[$emp[0].$emp[1]]['-']), count($arr_det_period_nopeg[$emp[0].$emp[1]]['#']));
             $pdf = new FPDF('L', 'mm', 'Letter');
             $pdf->AddPage();
@@ -382,30 +383,31 @@ class slip_gaji extends CI_Controller {
             $sumComp = 0;
 
             for ($i = 0; $i < $max_line_slip; $i++) {
-                if (empty($aSlipPlus[$i])) {
+                if (empty($arr_con_slip['+'][$i])) {
                     $aslip = $aslipDefault;
                 } else {
-                    $aslip = $this->keyValSlip($aSlipPlus[$i]);
-                    $sumPlus +=$aslip['amount'];
+                    $aslip = $$arr_con_slip['+'][$i];
+                    $sumPlus +=$aslip[5];
                 }
-                $pdf->Cell(60, 5, $aslip['str'], 1, 0, 'L');
-                $pdf->Cell(28, 5, $aslip['amount'], 1, 0, 'R');
-                if (empty($aSlipMinus[$i])) {
+                $pdf->Cell(60, 5, $aslip[3], 1, 0, 'L');
+                $pdf->Cell(28, 5, $aslip[5], 1, 0, 'R');
+                
+                if (empty($arr_con_slip['-'][$i])) {
                     $aslip = $aslipDefault;
                 } else {
-                    $aslip = $this->keyValSlip($aSlipMinus[$i]);
-                    $sumMinus +=$aslip['amount'];
+                    $aslip = $arr_con_slip['-'][$i];
+                    $sumMinus +=$aslip[5];
                 }
-                $pdf->Cell(60, 5, $aslip['str'], 1, 0, 'L');
-                $pdf->Cell(28, 5, $aslip['amount'], 1, 0, 'R');
-                if (empty($aSlipComp[$i])) {
+                $pdf->Cell(60, 5, $aslip[3], 1, 0, 'L');
+                $pdf->Cell(28, 5, $aslip[5], 1, 0, 'R');
+                if (empty($arr_con_slip['#'][$i])) {
                     $aslip = $aslipDefault;
                 } else {
-                    $aslip = $this->keyValSlip($aSlipComp[$i]);
-                    $sumComp +=$aslip['amount'];
+                    $aslip = $arr_con_slip['#'][$i];
+                    $sumComp +=$aslip[5];
                 }
-                $pdf->Cell(60, 5, $aslip['str'], 1, 0, 'L');
-                $pdf->Cell(28, 5, $aslip['amount'], 1, 1, 'R');
+                $pdf->Cell(60, 5, $aslip[3], 1, 0, 'L');
+                $pdf->Cell(28, 5, $aslip[5], 1, 1, 'R');
             }
             $pdf->Cell(60, 5, "Jumlah : ", 1, 0, 'R');
             $pdf->Cell(28, 5, number_format($sumPlus, 0, ".", ","), 1, 0, 'R');
