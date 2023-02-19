@@ -417,7 +417,7 @@ class slip_gaji extends CI_Controller {
         $pdf->Cell(28, 5, number_format($sumComp, 0, ".", ","), 1, 1, 'R');
 
         $pdf->Cell(60, 5, "Take Home Pay :", 1, 0, 'R');
-        $pdf->Cell(28, 5, number_format($sumPlus - $sumMinus, 0, ".", ","), 1, 1, 'R');
+        $pdf->Cell(28, 5, number_format($emp[8], 0, ".", ","), 1, 1, 'R');
         
         $pdf->Ln(10);
         $pdf->SetFont('Arial', 'B', 12);
@@ -427,9 +427,10 @@ class slip_gaji extends CI_Controller {
         $pdf->Cell(60, 5, $emp[9], 1, 0, 'L');
         $pdf->Cell(70, 5, $emp[10], 1, 0, 'L');
         $pdf->Cell(60, 5, $emp[11], 1, 0, 'L');
-        $pdf->Cell(74, 5, number_format(($sumPlus - $sumMinus), 0, ".", ","), 1, 1, 'R');
-
-        $pdf->output('F', "payslip/LINFOX_" . $emp[0] . "_" . $emp[1].".pdf");
+        $pdf->Cell(74, 5, number_format(($emp[8]), 0, ".", ","), 1, 1, 'R');
+        $filename = "payslip/LINFOX_" . $emp[0] . "_" . $emp[1].".pdf";
+        echo "<br/>".$filename."<br/>";
+        $pdf->output('F', $filename);
 
     }
 
