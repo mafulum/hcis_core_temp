@@ -337,6 +337,7 @@ class slip_gaji extends CI_Controller {
 
         $arr_emp = array_merge($arr_emp_1,$arr_emp_2);
         $arr_det = array_merge($arr_det_1,$arr_det_2,$arr_det_3,$arr_det_4,$arr_det_5);
+        echo count($arr_det)."|".count($arr_emp);exit;
         $arr_det_period_nopeg = [];
         foreach($arr_det as $det){
             if(in_array($det[0],$arr_det_period_nopeg)==false){
