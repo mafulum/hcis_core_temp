@@ -339,7 +339,7 @@ class slip_gaji extends CI_Controller {
         $arr_det = array_merge($arr_det_1,$arr_det_2,$arr_det_3,$arr_det_4,$arr_det_5);
         $arr_det_period_nopeg = [];
         foreach($arr_det as $det){
-            if(in_array($det[0].$det[1],$arr_det_period_nopeg)==false){
+            if(array_key_exists($det[0].$det[1],$arr_det_period_nopeg)==false){
                 $arr_det_period_nopeg[$det[0].$det[1]]  = ['+'=>[],'-'=>[],'#'=>[]];
             }
             $arr_det_period_nopeg[$det[0].$det[1]][$det[3]][]=$det;
