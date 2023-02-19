@@ -337,21 +337,18 @@ class slip_gaji extends CI_Controller {
 
         $arr_emp = array_merge($arr_emp_1,$arr_emp_2);
         $arr_det = array_merge($arr_det_1,$arr_det_2,$arr_det_3,$arr_det_4,$arr_det_5);
-        echo count($arr_det)."|".count($arr_emp);exit;
         $arr_det_period_nopeg = [];
         foreach($arr_det as $det){
-            if(in_array($det[0],$arr_det_period_nopeg)==false){
-                $arr_det_period_nopeg[$det[0]]=[];
+            if(in_array($det[0].$det[1],$arr_det_period_nopeg)==false){
+                $arr_det_period_nopeg[$det[0].$det[1]]=['+'=>[],'-'=>[],'#'=>[]];
             }
-            if(in_array($det[1],$arr_det_period_nopeg[$det[0]])==false){
-                $arr_det_period_nopeg[$det[0]][$det[1]]=['+'=>[],'-'=>[],'#'=>[]];
-            }
-            $arr_det_period_nopeg[$det[0]][$det[1]][$det[3]][]=$det;
+            $arr_det_period_nopeg[$det[0].$det[1]][$det[3]][]=$det;
         }
+        echo count($arr_det_period_nopeg);exit;
         foreach($arr_emp as $emp){
             var_dump($emp);
             echo "<br/>";
-            var_dump($arr_det_period_nopeg[$emp[0]][$emp[1]]);
+            var_dump($arr_det_period_nopeg[$emp[0].$emp[1]]);
             $max_line_slip = max(count($arr_det_period_nopeg[$emp[0]][$emp[1]]['+']), count($arr_det_period_nopeg[$emp[0]][$emp[1]]['-']), count($arr_det_period_nopeg[$emp[0]][$emp[1]]['#']));
             var_dump($arr_det_period_nopeg[$emp[0]][$emp[1]]);
             exit;
