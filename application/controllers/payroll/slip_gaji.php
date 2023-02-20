@@ -375,7 +375,7 @@ class slip_gaji extends CI_Controller {
             $pdf->Cell(88, 5, "Penerimaan", 1, 0, 'C');
             $pdf->Cell(88, 5, "Kontribusi Karyawan", 1, 0, 'C');
             $pdf->Cell(88, 5, "Kontribusi Perusahaan", 1, 1, 'C');
-            $aslipDefault = array("str" => "", "amount" => "");
+            $aslipDefault = array("str" => "", "amount" => "",2=>"",5=>"");
             $pdf->SetFont('Arial', '', 10);
             
             $sumPlus = 0;
