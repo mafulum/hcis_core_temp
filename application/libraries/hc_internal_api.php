@@ -19,7 +19,7 @@ class hc_internal_api {
     private function request($PATH,$METHOD,$PARAM){
         $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => 'http://172.10.30.23:8081/'.$PATH,
+          CURLOPT_URL => 'http://10.8.0.27:8181/'.$PATH,
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,
