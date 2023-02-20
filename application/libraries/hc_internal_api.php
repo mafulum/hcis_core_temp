@@ -34,7 +34,7 @@ class hc_internal_api {
     }
     
     public function sendMail($obj_reff,$subject,$message,$mail_to,$mail_cc=""){
-        $path = "machine/outbox_mail_message";
+        $path = "api/machine/outbox_mail_message";
         $param = array('mail_to' => $mail_to,'obj_ref' => $obj_reff,'message' => $message,'subject' => $subject);
         if(!empty($mail_cc)){
             $param['mail_cc'] = $mail_cc;
