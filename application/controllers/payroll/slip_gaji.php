@@ -83,7 +83,7 @@ class slip_gaji extends CI_Controller {
                             success: function(response) {
                                 console.log(response);
                                 var json = $.parseJSON(response);
-                                $("#pdf_content").html("<iframe src=\"data:application/pdf;base64,"+json.obj+"\" height=\"100%\" width=\"100%\"></iframe>");
+                                $("#pdf_content").html("<iframe src=\"data:application/pdf;base64,"+json.obj+"\" height=\"100%\" width=\"100%\" type=\"application/pdf\"></iframe>");
                                 // PDFObject.embed("data:application/pdf;base64,"+json.obj, "#pdf_content");
                                 setTimeout($.unblockUI, 500);
                                 // oTablePayrollTax.fnClearTable();
