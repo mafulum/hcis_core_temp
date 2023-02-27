@@ -38,10 +38,14 @@ class slip_gaji extends CI_Controller {
         $data['externalJS'] .='<script type="text/javascript" src="' . base_url() . 'assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>';
         $data['externalJS'] .='<script type="text/javascript" src="' . base_url() . 'assets/datatables/datatables.all.min.js?v=7.0.6"></script>';
         $data['externalJS'] .='<script type="text/javascript" src="' . base_url() . 'assets/data-tables/DT_bootstrap.js"></script>';
+        $data['externalJS'] .='<script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>';
         // $data['externalJS'] .='<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js" integrity="sha512-MoP2OErV7Mtk4VL893VYBFq8yJHWQtqJxTyIAsCVKzILrvHyKQpAwJf9noILczN6psvXUxTr19T5h+ndywCoVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>';
         $data['externalJS'] .= '<script src="' . base_url() . 'assets/jquery.blockUI.js"></script>';
         $this->load->model('employee_m');
         $data['scriptJS'] = '<script type="text/javascript">
+        var pdfjsLib = window["pdfjs-dist/build/pdf"];
+        // The workerSrc property shall be specified.
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "//mozilla.github.io/pdf.js/build/pdf.worker.js";
 		function format(item) {
 			if (!item.id) return "<b>" + item.text + "</b>"; // optgroup
 			return "&nbsp;&nbsp;&nbsp;" + item.text;
@@ -83,7 +87,40 @@ class slip_gaji extends CI_Controller {
                             success: function(response) {
                                 console.log(response);
                                 var json = $.parseJSON(response);
-                                $("#pdf_content").html("<iframe src=\"data:application/pdf;base64,"+json.obj+"\" height=\"100%\" width=\"100%\" type=\"application/pdf\"></iframe>");
+
+                                var loadingTask = pdfjsLib.getDocument({data: json.obj});
+                                loadingTask.promise.then(function(pdf) {
+                                console.log("PDF loaded");
+                                // Fetch the first page
+                                var pageNumber = 1;
+                                pdf.getPage(pageNumber).then(function(page) {
+                                    console.log("Page loaded");
+                                    
+                                    var scale = 1.5;
+                                    var viewport = page.getViewport({scale: scale});
+
+                                    // Prepare canvas using PDF page dimensions
+                                    var canvas = document.getElementById("pdf_content");
+                                    var context = canvas.getContext("2d");
+                                    canvas.height = viewport.height;
+                                    canvas.width = viewport.width;
+
+                                    // Render PDF page into canvas context
+                                    var renderContext = {
+                                        canvasContext: context,
+                                        viewport: viewport
+                                    };
+                                    var renderTask = page.render(renderContext);
+                                    renderTask.promise.then(function () {
+                                        console.log("Page rendered");
+                                    });
+                                });
+                                }, function (reason) {
+                                    // PDF loading error
+                                    console.error(reason);
+                                });
+
+                                // $("#pdf_content").html("<iframe src=\"data:application/pdf;base64,"+json.obj+"\" height=\"100%\" width=\"100%\" type=\"application/pdf\"></iframe>");
                                 // PDFObject.embed("data:application/pdf;base64,"+json.obj, "#pdf_content");
                                 setTimeout($.unblockUI, 500);
                                 // oTablePayrollTax.fnClearTable();
