@@ -76,7 +76,8 @@ class slip_gaji extends CI_Controller {
                             type: "get", //send it through get method
                             timeout : 0,
                             data: { 
-                              year: $("#fPeriodRegular").val()
+                              year: $("#fPeriodRegular").val(),
+                              nopegs: $("#fnik").val(),
                             },
                             success: function(response) {
                                 // setTimeout($.unblockUI, 500);
@@ -106,7 +107,7 @@ class slip_gaji extends CI_Controller {
         set_time_limit(0);
         ini_set("max_execution_time",3600);
         $period = $this->input->get('year');
-        $nopeg = $this->input->get('fnik');
+        $nopeg = $this->input->get('nopegs');
         $year = substr($period,0,4);
         echo $year."|".$period."|".$nopeg;
         // $data = http_build_query($paramAPI);
