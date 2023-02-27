@@ -26,7 +26,80 @@ class slip_gaji extends CI_Controller {
     }
 
     public function index(){
-        die("WOE");
+        
+        $data['base_url'] = $this->config->item('base_url');
+        $data["userid"] = $this->session->userdata('username');
+        $data['view'] = 'payroll/slip_gaji';
+        $data['externalCSS'] ='<link href="' . base_url() . 'css/select2.css" rel="stylesheet">';
+        $data['externalCSS'] .='<link rel="stylesheet" href="' . base_url() . 'assets/datatables/datatables.bundle.css" />';
+        $data['externalCSS'] .='<link rel="stylesheet" href="' . base_url() . 'assets/data-tables/DT_bootstrap.css" />';
+        $data['externalCSS'] .='<link rel="stylesheet" type="text/css" href="' . base_url() . 'assets/bootstrap-datepicker/css/datepicker.css" />';
+        
+        $data['externalJS'] ='<script type="text/javascript" src="' . base_url() . 'js/select2.min.js"></script>';
+        $data['externalJS'] .='<script type="text/javascript" src="' . base_url() . 'assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>';
+        $data['externalJS'] .='<script type="text/javascript" src="' . base_url() . 'assets/datatables/datatables.all.min.js?v=7.0.6"></script>';
+        $data['externalJS'] .='<script type="text/javascript" src="' . base_url() . 'assets/data-tables/DT_bootstrap.js"></script>';
+        $data['externalJS'] .= '<script src="' . base_url() . 'assets/jquery.blockUI.js"></script>';
+        $this->load->model('employee_m');
+        $data['scriptJS'] = '<script type="text/javascript">
+		function format(item) {
+			if (!item.id) return "<b>" + item.text + "</b>"; // optgroup
+			return "&nbsp;&nbsp;&nbsp;" + item.text;
+		};
+                function blockPage(text){   
+                    if(text==undefined || text==""){
+                        text="Loading..."; 
+                    }
+                    $.blockUI({ message: \'<img width="200px" src="' . base_url() . 'img/loader.gif" /><h1>\'+text+ \'</h1>\',   
+                        css: {   
+                        border: \'none\',  
+                        width: \'240px\',  
+                        \'-webkit-border-radius\': \'10px\',   
+                        \'-moz-border-radius\': \'10px\',   
+                        opacity: .9  
+                        }   
+                    });   
+                    return false;  
+                }
+		$(document).ready(function() {
+
+                    $("#fProcess").click(function(){
+                        blockPage("Please wait for a while ");
+                        vis_reg = "on";
+                        if ($("#fIsReg").is(":checked"))
+                        {
+                            vis_reg = "on";
+                        }else{
+                            vis_reg = "off";
+                        }
+                        $.ajax({
+                            url: "'. base_url().'index.php/payroll/tax_yearly/go",
+                            type: "get", //send it through get method
+                            timeout : 0,
+                            data: { 
+                              year: $("#fPeriodRegular").val()
+                            },
+                            success: function(response) {
+                                // setTimeout($.unblockUI, 500);
+                                // oTablePayrollTax.fnClearTable();
+                                // oTablePayrollTax.fnAddData(response.content.tax);
+                            },
+                            error: function(xhr) {
+                              //Do Something to handle error
+                                // blockPage("Error");
+                                // oTablePayrollTax.fnClearTable();
+                                // setTimeout($.unblockUI, 500);
+                                // $("#title").html("");
+                            }
+                        });
+                    });
+                    $("#cPeriodRegular").datepicker({
+                        autoclose: true
+                    });
+                    $("[data-toggle=\'switch\']").wrap(\'<div class="switch" />\').parent().bootstrapSwitch();
+		});
+		</script>';
+        $this->load->view('main', $data);
     }
     
     public function sendMailSlip($id_document_transfer){
