@@ -120,7 +120,7 @@ class slip_gaji extends CI_Controller {
                                     console.error(reason);
                                 });
 
-                                // $("#pdf_content").html("<iframe src=\"data:application/pdf;base64,"+json.obj+"\" height=\"100%\" width=\"100%\" type=\"application/pdf\"></iframe>");
+                                // $("#pdf_content").html("<iframe src=\"data:application/pdf;base64,"+atob(json.obj)+"\" height=\"100%\" width=\"100%\" type=\"application/pdf\"></iframe>");
                                 // PDFObject.embed("data:application/pdf;base64,"+json.obj, "#pdf_content");
                                 setTimeout($.unblockUI, 500);
                                 // oTablePayrollTax.fnClearTable();
