@@ -24,6 +24,10 @@ class slip_gaji extends CI_Controller {
         $this->load->model('pa_payroll/addtlinfo_m');
         $this->load->library('FPDFlib');
     }
+
+    public function index(){
+        die("WOE");
+    }
     
     public function sendMailSlip($id_document_transfer){
         $obj = $this->slip_mail_m->getSlipMailUnSent($id_document_transfer);
