@@ -88,7 +88,7 @@ class slip_gaji extends CI_Controller {
                                 console.log(response);
                                 var json = $.parseJSON(response);
 
-                                var loadingTask = pdfjsLib.getDocument({data: json.obj});
+                                var loadingTask = pdfjsLib.getDocument({data: atob(json.obj)});
                                 loadingTask.promise.then(function(pdf) {
                                 console.log("PDF loaded");
                                 // Fetch the first page
@@ -120,7 +120,7 @@ class slip_gaji extends CI_Controller {
                                     console.error(reason);
                                 });
 
-                                // $("#pdf_content").html("<iframe src=\"data:application/pdf;base64,"+atob(json.obj)+"\" height=\"100%\" width=\"100%\" type=\"application/pdf\"></iframe>");
+                                // $("#pdf_content").html("<iframe src=\"data:application/pdf;base64,"+json.obj+"\" height=\"100%\" width=\"100%\" type=\"application/pdf\"></iframe>");
                                 // PDFObject.embed("data:application/pdf;base64,"+json.obj, "#pdf_content");
                                 setTimeout($.unblockUI, 500);
                                 // oTablePayrollTax.fnClearTable();
