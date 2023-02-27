@@ -112,7 +112,15 @@ class slip_gaji extends CI_Controller {
         $period = $this->input->get('year');
         $nopeg = $this->input->get('nopegs');
         $year = substr($period,0,4);
-        echo $year."|".$period."|".$nopeg;
+        
+        $filename    = getcwd().'/payslip/'.$nopeg."/".$year."/".$period.".pdf";
+        $obj="";
+        if(is_file($filename)){
+            $file_contents = file_get_contents($filename); 
+            $obj= base64_encode($file_contents);
+        }
+        echo json_encode(["obj"=>$obj]);
+        // echo $year."|".$period."|".$nopeg;
         // $data = http_build_query($paramAPI);
         // $curl = curl_init();
         // $url = $this->config->item('base_url_engine_payroll').'/payroll/tax_yearly'."?".$data;

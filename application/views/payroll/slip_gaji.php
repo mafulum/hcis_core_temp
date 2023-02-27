@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="fnik" class="col-lg-2 col-sm-2 control-label">Nopeg (comma separated)</label>
+                        <label for="fnik" class="col-lg-2 col-sm-2 control-label">Nopeg</label>
                         <div class="col-md-3 col-xs-11">
                             <input type="text" class="form-control" id="fnik" name="fnik" value="" style="padding: 0.5px 0px;">
                         </div>
