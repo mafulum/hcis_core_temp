@@ -43,7 +43,8 @@
                 </span>
             </header>
             <div class="panel-body">
-               CONTENT
+                <div id="pdf_content" style="height: 800px;">
+                </div>
             </div>
         </section>
     </div>

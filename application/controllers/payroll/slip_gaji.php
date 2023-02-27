@@ -38,6 +38,7 @@ class slip_gaji extends CI_Controller {
         $data['externalJS'] .='<script type="text/javascript" src="' . base_url() . 'assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>';
         $data['externalJS'] .='<script type="text/javascript" src="' . base_url() . 'assets/datatables/datatables.all.min.js?v=7.0.6"></script>';
         $data['externalJS'] .='<script type="text/javascript" src="' . base_url() . 'assets/data-tables/DT_bootstrap.js"></script>';
+        $data['externalJS'] .='<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js" integrity="sha512-MoP2OErV7Mtk4VL893VYBFq8yJHWQtqJxTyIAsCVKzILrvHyKQpAwJf9noILczN6psvXUxTr19T5h+ndywCoVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>';
         $data['externalJS'] .= '<script src="' . base_url() . 'assets/jquery.blockUI.js"></script>';
         $this->load->model('employee_m');
         $data['scriptJS'] = '<script type="text/javascript">
@@ -80,15 +81,17 @@ class slip_gaji extends CI_Controller {
                               nopegs: $("#fnik").val(),
                             },
                             success: function(response) {
-                                // setTimeout($.unblockUI, 500);
+                                console.log(response);
+                                PDFObject.embed("data:application/pdf;base64,"+response.data.obj, "#pdf_content");
+                                setTimeout($.unblockUI, 500);
                                 // oTablePayrollTax.fnClearTable();
                                 // oTablePayrollTax.fnAddData(response.content.tax);
                             },
                             error: function(xhr) {
                               //Do Something to handle error
-                                // blockPage("Error");
+                                blockPage("Error");
                                 // oTablePayrollTax.fnClearTable();
-                                // setTimeout($.unblockUI, 500);
+                                setTimeout($.unblockUI, 500);
                                 // $("#title").html("");
                             }
                         });
