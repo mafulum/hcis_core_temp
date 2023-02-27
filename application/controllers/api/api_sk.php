@@ -10,7 +10,7 @@
  *
  * @author Garuda
  */
-class api_slip extends CI_Controller {
+class api_sk extends CI_Controller {
 
     //put your code here
     function __construct() {
