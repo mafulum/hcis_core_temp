@@ -13,9 +13,9 @@
 class send_mail_spt_2022 extends CI_Controller {
 
     var $maps =[
-        ["pernr'=>'9500067","emp_nama"=>"MAF'ULUM MUTTAQIN","email"=>"mafulum.m@garudapratama.com"],
-        ["pernr'=>'9500067","emp_nama"=>"MAF'ULUM MUTTAQIN","email"=>"mafulum.muttaqin@gmail.com"],
-        ["pernr'=>'9500067","emp_nama"=>"MAF'ULUM MUTTAQIN","email"=>"mafulum.m@garuda-indonesia.com"]
+        ["pernr"=>"9500067","emp_nama"=>"MAF'ULUM MUTTAQIN","email"=>"mafulum.m@garudapratama.com"],
+        ["pernr"=>"9500067","emp_nama"=>"MAF'ULUM MUTTAQIN","email"=>"mafulum.muttaqin@gmail.com"],
+        ["pernr"=>"9500067","emp_nama"=>"MAF'ULUM MUTTAQIN","email"=>"mafulum.m@garuda-indonesia.com"]
     ];
 
     //put your code here
