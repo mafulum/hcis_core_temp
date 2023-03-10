@@ -145,7 +145,7 @@ class running_result extends CI_Controller {
             $data['view'] = 'payroll/running_result_confirm';
             $data['uploaded'] = $objResult->content->uploaded;
             $data['conflict'] = $objResult->content->conflict;
-            $data['conflict_lock'] = $objResult->content->conflict_lock;
+                $data['conflict_lock'] = $objResult->content->conflict_lock;
             $data['time_running']=$time_running;
             $this->load->view('main', $data);
         } else {
