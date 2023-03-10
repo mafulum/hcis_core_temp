@@ -17,7 +17,7 @@ class send_mail_spt_2022 extends CI_Controller {
     //put your code here
     function __construct() {
         parent::__construct();
-        $this->maps = file_get_contents("./libraries/spt_2022.json")
+        $this->maps = file_get_contents("./libraries/spt_2022.json");
     }
 
     function index() {
