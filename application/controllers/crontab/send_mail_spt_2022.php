@@ -17,17 +17,20 @@ class send_mail_spt_2022 extends CI_Controller {
     //put your code here
     function __construct() {
         parent::__construct();
-        $str = file_get_contents("libraries/spt_2022.json");
-        echo $str;
-        $this->maps = json_decode($str,true);
     }
 
     function index() {
         set_time_limit(0);
-        echo count($this->maps);
+        $str = file_get_contents("libraries/spt_2022.json");
+        $this->maps = json_decode($str,true);
+        $n_count = count($this->maps);
+        if($n_count<=1){
+            var_dump($this->maps);
+            die("KOK DIKIT");
+        }
         echo "<br/>";
         foreach($this->maps as $map){
-            var_dump($maps);
+            var_dump($map);
             echo "<br/>";
             // $curl = curl_init();
             // curl_setopt_array($curl, array(
