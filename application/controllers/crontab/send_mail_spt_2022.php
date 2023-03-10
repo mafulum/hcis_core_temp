@@ -25,7 +25,7 @@ class send_mail_spt_2022 extends CI_Controller {
 
     function index() {
         set_time_limit(0);
-        foreach($maps as $map){
+        foreach($this->maps as $map){
             $curl = curl_init();
             curl_setopt_array($curl, array(
               CURLOPT_URL => 'http://172.17.0.1:8181/api/machine/send_spt_2022',
