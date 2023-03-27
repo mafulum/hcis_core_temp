@@ -197,7 +197,7 @@ class slip_gaji extends CI_Controller {
         return $aRet;
     }
 
-    public function generate_single_regular($id_document_transfer, $pernr, $abkrs, $id_bank_transfer = null, $isRet = false) {
+    public function generate_single_regular($id_document_transfer, $pernr, $abkrs=null, $id_bank_transfer = null, $isRet = false) {
         ini_set("memory_limit", "512M");
         if (empty($id_bank_transfer)) {
             $id_bank_transfer = $this->bank_transfer_m->getIDBankTransferFromDocTransferEmp($id_document_transfer, $pernr);
@@ -225,7 +225,7 @@ class slip_gaji extends CI_Controller {
 //        $profile['CNAME']="-";
 //        $profile['PERNR']='-';
         $payroll_running = $this->running_payroll_m->get_row_by_bank_transfer($id_bank_transfer);
-        var_dump($payroll_running);exit;
+        // var_dump($payroll_running);exit;
         $addtl_info = null;
         if (empty($payroll_running['offcycle'])) {
             $profile['periode_text'] = $payroll_running['periode_regular'];
@@ -407,7 +407,7 @@ class slip_gaji extends CI_Controller {
         }
     }
 
-    public function generate_slip_regular_single_file($id_document_transfer, $pernr, $abkrs, $id_bank_transfer) {
+    public function generate_slip_regular_single_file($id_document_transfer, $pernr, $abkrs=null, $id_bank_transfer=null) {
         $aret = $this->generate_single_regular($id_document_transfer, $pernr, $abkrs, $id_bank_transfer, true);
         if (!empty($aret['pdf'])) {
             $year = $aret['year'];
@@ -449,7 +449,8 @@ class slip_gaji extends CI_Controller {
 //                    var_dump($btemps);
 //                    exit;
                 }
-                $aret = $this->generate_single_regular($id_document_transfer, $btemps['PERNR'], $btemps['ABKRS'], $btemps['id_bank_transfer'], true);
+                $aret = $this->generate_single_regular($id_document_transfer, $btemps['PERNR'], null, $btemps['id_bank_transfer'], true);
+                // $aret = $this->generate_single_regular($id_document_transfer, $btemps['PERNR'], $btemps['ABKRS'], $btemps['id_bank_transfer'], true);
                 if (!empty($aret) && !empty($aret['pdf'])) {
                     $pernr = $btemps['PERNR'];
                     $year = $aret['year'];
