@@ -197,7 +197,9 @@ class running_payroll_m extends CI_Model {
         $this->db->from($this->table_wagetype);
         $this->db->where('id_bank_transfer',$id_bank_transfer);
         $this->db->where('PERNR',$pernr);
-        $this->db->where('ABKRS',$abkrs);
+        if(!empty($abkrs)){
+            $this->db->where('ABKRS',$abkrs);
+        }
         $this->db->select('WGTYP,LGTXT,SUM(WAMNT) WAMNT,PRTYP');
         $this->db->group_by("PERNR,WGTYP,LGTXT,PRTYP,ABKRS");
         $this->db->order_by('PRTYP ASC,WGTYP ASC');
@@ -266,7 +268,9 @@ class running_payroll_m extends CI_Model {
         $this->db->from($this->table_emp);
         $this->db->where('id_bank_transfer',$id_bank_transfer);
         $this->db->where('PERNR',$pernr);
-        $this->db->where('ABKRS',$abkrs);
+        if(!empty($abkrs)){
+            $this->db->where('ABKRS',$abkrs);
+        }
         $this->db->order_by('ENDDA DESC');
         $temp = $this->db->get();
         if(empty($temp) || $temp->num_rows()==0){
