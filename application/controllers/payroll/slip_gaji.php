@@ -225,6 +225,7 @@ class slip_gaji extends CI_Controller {
 //        $profile['CNAME']="-";
 //        $profile['PERNR']='-';
         $payroll_running = $this->running_payroll_m->get_row_by_bank_transfer($id_bank_transfer);
+        var_dump($payroll_running);exit;
         $addtl_info = null;
         if (empty($payroll_running['offcycle'])) {
             $profile['periode_text'] = $payroll_running['periode_regular'];
