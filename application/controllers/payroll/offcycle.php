@@ -354,8 +354,8 @@ class offcycle extends CI_Controller {
         $pdf = new FPDF('L', 'mm', 'Letter');
         $pdf->AddPage();
 
-        $pdf->Image('http://localhost/hcis_gdps/img/Beyond_Care.png', 10, 2, 30, 0, 'PNG');
-        $pdf->Image('http://localhost/hcis_gdps/img/gdps_logo_white.png', 210, 0, 60, 0, 'PNG');
+        $pdf->Image('http://localhost/img/Beyond_Care.png', 10, 2, 30, 0, 'PNG');
+        $pdf->Image('http://localhost/img/gdps_logo_white.png', 210, 0, 60, 0, 'PNG');
         $pdf->Ln(10);
         $pdf->SetFont('Arial', 'B', 12);
 
