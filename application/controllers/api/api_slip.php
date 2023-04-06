@@ -52,6 +52,8 @@ class api_slip extends CI_Controller {
         if(is_file($filename)){
             $file_contents = file_get_contents($filename); 
             $obj= base64_encode($file_contents);
+        }else{
+            die($filename);
         }
         echo json_encode(["obj"=>$obj]);
     }
