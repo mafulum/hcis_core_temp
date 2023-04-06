@@ -47,7 +47,7 @@ class api_slip extends CI_Controller {
     }
     
     public function get_object_slip($nopeg,$year,$name){
-        $filename    = getcwd().'/payslip/'.$nopeg."/".$year."/".htmlspecialchars_decode($name).".pdf";
+        $filename    = getcwd().'/payslip/'.$nopeg."/".$year."/".html_entity_decode($name).".pdf";
         $obj="";
         if(is_file($filename)){
             $file_contents = file_get_contents($filename); 
