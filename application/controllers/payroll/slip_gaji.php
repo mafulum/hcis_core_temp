@@ -158,7 +158,7 @@ class slip_gaji extends CI_Controller {
         if(!empty($offcycle)){
             $this->load->model('payroll/offcycle_m');
             $oOffcycle = $this->offcycle_m->getOffCycle($offcycle);
-            $year = left($oOffcycle['evtda'],4);
+            $year = substr($oOffcycle['evtda'],0,4);
             $filename_1 = getcwd().'/payslip/'.$nopeg."/".$year."/".$oOffcycle['id'].".pdf";
             $filename_2 = getcwd().'/payslip/'.$nopeg."/".$year."/".$oOffcycle['name'].".pdf";
             if(is_file($filename_1)){
