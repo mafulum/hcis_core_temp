@@ -27,7 +27,7 @@
                                 <option value='0'>Empty for Regular Payroll</option>
                                 <?php
                                 foreach($offcycle as $row){
-                                    echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                                    echo "<option value='".$row['id']."'>".$row['id']."-".$row['name']."</option>";
                                 }
                                 ?>
                             </select>
