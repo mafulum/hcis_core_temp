@@ -21,6 +21,19 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="fnik" class="col-lg-2 col-sm-2 control-label">OffCycle</label>
+                        <div class="col-md-3 col-xs-11">
+                        <select class="form-control" id="offcycle" name="offcycle" style="padding: 3px 0px;">
+                                <option value='0'>Empty for Regular Payroll</option>
+                                <?php
+                                foreach($offcycle as $row){
+                                    echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="fnik" class="col-lg-2 col-sm-2 control-label">Nopeg</label>
                         <div class="col-md-3 col-xs-11">
                             <input type="text" class="form-control" id="fnik" name="fnik" value="" style="padding: 0.5px 0px;">
@@ -45,7 +58,7 @@
             <div class="panel-body">
                 <!-- <div id="pdf_content" style="height: 800px;"> -->
                 <canvas id="pdf_content" style="height: 800px;"></canvas>
-                </div>
+                <!-- </div> -->
             </div>
         </section>
     </div>

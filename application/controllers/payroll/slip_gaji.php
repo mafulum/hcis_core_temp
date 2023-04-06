@@ -28,6 +28,8 @@ class slip_gaji extends CI_Controller {
     public function index(){
         $data['base_url'] = $this->config->item('base_url');
         $data["userid"] = $this->session->userdata('username');
+        $this->load->model('payroll/offcycle_m');
+        $data['offcycle'] = $this->offcycle_m->getOffCycle();
         $data['view'] = 'payroll/slip_gaji';
         $data['externalCSS'] ='<link href="' . base_url() . 'css/select2.css" rel="stylesheet">';
         $data['externalCSS'] .='<link rel="stylesheet" href="' . base_url() . 'assets/datatables/datatables.bundle.css" />';
@@ -82,6 +84,7 @@ class slip_gaji extends CI_Controller {
                             timeout : 0,
                             data: { 
                               year: $("#fPeriodRegular").val(),
+                              offcycle: $("#offcycle").val(),
                               nopegs: $("#fnik").val(),
                             },
                             success: function(response) {
@@ -149,10 +152,23 @@ class slip_gaji extends CI_Controller {
         set_time_limit(0);
         ini_set("max_execution_time",3600);
         $period = $this->input->get('year');
+        $offcycle = $this->input->get('offcycle');
         $nopeg = $this->input->get('nopegs');
         $year = substr($period,0,4);
-        
-        $filename    = getcwd().'/payslip/'.$nopeg."/".$year."/".$period.".pdf";
+        if(!empty($offcycle)){
+            $this->load->model('payroll/offcycle_m');
+            $oOffcycle = $this->offcycle_m->getOffCycle($offcycle);
+            $year = left($oOffcycle['evtda'],4);
+            $filename_1 = getcwd().'/payslip/'.$nopeg."/".$year."/".$oOffcycle['id'].".pdf";
+            $filename_2 = getcwd().'/payslip/'.$nopeg."/".$year."/".$oOffcycle['name'].".pdf";
+            if(is_file($filename_1)){
+                $filename=$filename_1;
+            }else if(is_file($filename_2)){
+                $filename=$filename_2;
+            }
+        }else{
+            $filename = getcwd().'/payslip/'.$nopeg."/".$year."/".$period.".pdf";
+        }
         $obj="";
         if(is_file($filename)){
             $file_contents = file_get_contents($filename); 
@@ -209,17 +225,17 @@ class slip_gaji extends CI_Controller {
         $wgtyps = $this->running_payroll_m->get_emp_wagetype_by_pernr_bank_transfer($id_bank_transfer, $pernr, $abkrs);
 //        var_dump($wgtyps);exit;
         if(empty($wgtyps)){
-//            echo __LINE__;exit;
+           echo __LINE__;exit;
             return null;
         }
         $banks = $this->bank_transfer_m->get_bank_transfer_by_pernr_bank_transfer($id_bank_transfer, $pernr, $abkrs);
         if(empty($banks)){
-//            echo __LINE__;exit;
+           echo __LINE__;exit;
             return null;
         }
         $profile = $this->running_payroll_m->get_emp_profile_by_pernr_bank_transfer($id_bank_transfer, $pernr, $abkrs);
         if(empty($profile)){
-//            echo __LINE__;exit;
+           echo __LINE__;exit;
             return null;
         }
 //        $profile['CNAME']="-";
