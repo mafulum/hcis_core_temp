@@ -165,6 +165,8 @@ class slip_gaji extends CI_Controller {
                 $filename=$filename_1;
             }else if(is_file($filename_2)){
                 $filename=$filename_2;
+            }else{
+                die($filename_1."|".$filename_2);
             }
         }else{
             $filename = getcwd().'/payslip/'.$nopeg."/".$year."/".$period.".pdf";
