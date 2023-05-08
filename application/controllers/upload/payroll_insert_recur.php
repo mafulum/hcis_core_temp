@@ -76,7 +76,7 @@ class payroll_insert_recur extends CI_Controller {
             }
             $col++;            
         }
-        if ($MAX_ROW == $col) {
+        if (false && $MAX_ROW == $col) {
             return "<b>ERROR</b> : <br/><br/>" . "Does not have data";
         }
 
