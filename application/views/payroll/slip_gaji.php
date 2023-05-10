@@ -40,6 +40,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="fnik" class="col-lg-2 col-sm-2 control-label">Nopeg</label>
+                        <div class="col-md-3 col-xs-11">
+                        <input type="text" class="form-control" id="iNopeg" name="iNopeg" value="" style="padding: 3px 0px;">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10">
                             <button type="button" class="btn btn-default" id="fProcess">Check</button>
                         </div>

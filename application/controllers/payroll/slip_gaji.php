@@ -67,7 +67,25 @@ class slip_gaji extends CI_Controller {
                     });   
                     return false;  
                 }
-		$(document).ready(function() {
+                $(document).ready(function() {
+                    $("#iNopeg").select2({
+                        minimumInputLength: 1,
+                        dropdownAutoWidth: true,
+                        ajax: {
+                            url: "' . base_url() . 'index.php/employee/fetch_emp/",
+                            dataType: "json",
+                            type: "POST",
+                            data: function (term, page) {
+                                return {
+                                    q: term
+                                };
+                            },
+                            results: function (data, page) {
+                                return {results: data};
+                            },initSelection: function(element, callback) {
+                            }
+                        }
+                    });
 
                     $("#fProcess").click(function(){
                         blockPage("Please wait for a while ");

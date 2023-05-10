@@ -202,7 +202,7 @@ jQuery(document).ready(function() {
             if($nRows==0){
                 return "null";
             }else if($nRows==1){
-                $aRow = $oRes->row_array();
+                // $aRow = $oRes->row_array();
                 return "your input had time constraint with another row with begda ".$this->global_m->get_array_data($aRow, "BEGDA",$this->global_m->DATE_MYSQL)." and endda ".$this->global_m->get_array_data($aRow, "ENDDA",$this->global_m->DATE_MYSQL).", do you want overwrite ?";
             }else{
                 return "your input had time constraint with ".$nRows." row , do you want overwrite (can cause delete some row) ?";
