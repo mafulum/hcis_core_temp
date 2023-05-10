@@ -68,7 +68,7 @@ class slip_gaji extends CI_Controller {
                     return false;  
                 }
                 $(document).ready(function() {
-                    $("#iNopeg").select2({
+                    $("#fnik").select2({
                         minimumInputLength: 1,
                         dropdownAutoWidth: true,
                         ajax: {
