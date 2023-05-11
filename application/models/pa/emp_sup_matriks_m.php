@@ -39,7 +39,7 @@ class emp_sup_matriks_m extends CI_Model {
     function get_pic_customer($subty="",$werks=""){
         $sQuery = "SELECT id,type,WERKS,pernr,nama,email,position,unit_stext,unit_short FROM tm_pic_customer";
         if(!empty($subty) || !empty($werks)){
-            $sQuery .= " WHERE ";
+            $sQuery .= " WHERE deleted_at is null AND ";
             if(!empty($subty)){
                 $sQuery .= "SUBTY='".$subty."' ";
             }
@@ -87,7 +87,7 @@ class emp_sup_matriks_m extends CI_Model {
                         if(pic_cust[i]["type"]!=sel_subty || pic_cust[i]["WERKS"]!=sel_werks){
                             continue;
                         } 
-                        var newOption = new Option(pic_cust[i]["nama"]+" - "+pic_cust[i]["position"], pic_cust[i]["pernr"], false, false);
+                        var newOption = new Option(pic_cust[i]["pernr"]+" -"+pic_cust[i]["nama"]+" - "+pic_cust[i]["position"], pic_cust[i]["pernr"], false, false);
                         $("#PERNR_MATRIKS").append(newOption);
                     }
                     $("#PERNR_MATRIKS").trigger("change");
