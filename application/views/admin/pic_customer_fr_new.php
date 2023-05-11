@@ -34,7 +34,7 @@
                             <div class="col-lg-10">
                                 <select class="form-control" id="type" name="type" style="padding: 3px 0px;">
                                     <option value='F020'>Operational Representative Management</option>
-                                    <option value='F002'>PIC Customer</option>
+                                    <option value='F002'>Customer / Cross People Manager</option>
                                 </select>
                             </div>
                         </div>
