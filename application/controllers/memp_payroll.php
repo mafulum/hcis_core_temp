@@ -732,6 +732,7 @@ class memp_payroll extends CI_Controller {
             $this->form_validation->set_rules('wgtyp', 'wgtyp', 'trim|required');
             $this->form_validation->set_rules('wamnt', 'wamnt', 'trim');
             $this->form_validation->set_rules('wapct', 'wapct', 'trim');
+            $this->form_validation->set_rules('note', 'note', 'trim');
             if ($this->form_validation->run()) {
                 $this->load->model('pa_payroll/recurring_m');
                 $a['PERNR'] = $pernr = $this->input->post('pernr');
@@ -740,6 +741,7 @@ class memp_payroll extends CI_Controller {
                 $a['WGTYP'] = $this->input->post('wgtyp');
                 $a['WAMNT'] = $this->input->post('wamnt');
                 $a['WAPCT'] = $this->input->post('wapct');
+                $a['NOTE'] = $this->input->post('note');
                 $oRes = $this->recurring_m->check_time_constraint_recurring($a['PERNR'], $a['BEGDA'], $a['ENDDA'], $a['WGTYP'], "CHECK");
                 if ($oRes->num_rows() > 0) {
                     $sAdd = "";
@@ -775,8 +777,9 @@ class memp_payroll extends CI_Controller {
             $this->form_validation->set_rules('begda', 'begda', 'trim|required');
             $this->form_validation->set_rules('endda', 'endda', 'trim|required');
             $this->form_validation->set_rules('wgtyp', 'wgtyp', 'trim|required');
-            $this->form_validation->set_rules('wamnt', 'wamnt', 'trim|');
-            $this->form_validation->set_rules('wapct', 'wapct', 'trim|');
+            $this->form_validation->set_rules('wamnt', 'wamnt', 'trim');
+            $this->form_validation->set_rules('wapct', 'wapct', 'trim');
+            $this->form_validation->set_rules('note', 'note', 'trim');
             if ($this->form_validation->run()) {
                 $this->load->model('pa_payroll/recurring_m');
                 $emp_recuradddeduc_id = $this->input->post('emp_recuradddeduc_id');
@@ -786,6 +789,7 @@ class memp_payroll extends CI_Controller {
                 $a['WGTYP'] = $this->input->post('wgtyp');
                 $a['WAMNT'] = $this->input->post('wamnt');
                 $a['WAPCT'] = $this->input->post('wapct');
+                $a['NOTE'] = $this->input->post('note');
                 $this->recurring_m->personal_recurring_upd($emp_recuradddeduc_id, $pernr, $a);
                 redirect('memp_payroll/personal_recurring/' . $pernr, 'refresh');
             } else
