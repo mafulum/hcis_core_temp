@@ -31,6 +31,10 @@
                     <label for="input3" class="col-lg-2 col-sm-2 control-label">Percent</label>
                     <label for="input6" class="col-lg-4 col-sm-4 control-label"><?php echo $this->global_m->get_array_data_num($frm, "WAPCT"); ?></label>
                 </div>
+                <div class="form-group">
+                    <label for="input3" class="col-lg-2 col-sm-2 control-label">Note</label>
+                    <label for="input6" class="col-lg-4 col-sm-4 control-label"><?php echo $this->global_m->get_array_data($frm, "NOTE"); ?></label>
+                </div>
             </div>
         </section>
         <a class="btn btn-default" href="<?php echo base_url() . "index.php/memp_payroll/personal_recurring/" . $this->global_m->get_array_data($master_emp, "PERNR"); ?>" data-toggle="modal"> <i class=" fa fa-chevron-left"> Back</i> </a>

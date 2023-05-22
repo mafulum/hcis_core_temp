@@ -46,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <label for="input3" class="col-lg-2 col-sm-2 control-label">Note</label>
-                        <div class="col-lg-4">
+                        <div class="col-lg-10">
                             <input type="text" class="form-control" id="note" name="note" value="<?php echo $this->global_m->get_array_data($frm, "NOTE"); ?>">
                         </div>
                     </div>
