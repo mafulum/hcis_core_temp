@@ -52,7 +52,6 @@ class monitoring_of_task extends CI_Controller {
             $abbrevKV = $this->common->getKVArr($abbrev,'id');
             $aParamViews=['rows'=>$aRow,'emp'=>$aEmpKV,'abbrev'=>$abbrevKV,'date'=>$date];
             $msg = $this->load->view('employee/pa/monitoring_mail_daily', $aParamViews, TRUE);
-            echo $msg;exit;
             $obj_reff = "MONTASK_DAILY|".$date;
             $subject = "Monitoring of Task Daily ".$date;
             $this->hc_internal_api->sendMail($obj_reff,$subject,$msg,$sEmail);
