@@ -28,8 +28,8 @@
         <td><?php echo (!empty($row['REMINDER_DATE']))?$row['REMINDER_DATE']:"";?></td>
         <td><?php echo (!empty($row['BEGDA']))?$row['BEGDA']:"";?></td>
         <td><?php echo (!empty($row['ENDDA']))?$row['ENDDA']:"";?></td>
-        <td><?php echo (!empty($row['PERNR']['ABKRS']))?$row['PERNR']['ABKRS']:"";?></td>
-        <td><?php echo (!empty($row['PERNR']['WERKS']))?$row['PERNR']['WERKS']:"";?></td>
+        <td><?php echo (!empty($emp[$row['PERNR']]['ABKRS']))?$emp[$row['PERNR']]['ABKRS']:"";?></td>
+        <td><?php echo (!empty($emp[$row['PERNR']]['WERKS']))?$emp[$row['PERNR']]['WERKS']:"";?></td>
     </tr>
     <?php
     }
