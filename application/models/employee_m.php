@@ -4076,9 +4076,9 @@ jQuery(document).ready(function() {
     }
 
     function getEmpByPernrs($aPernr) {
-        $sql = "SELECT eo.PERNR,ORGEH,PLANS,STELL,PERSG,PERSK,CNAME,GBDAT,WERKS,ma_persg.STEXT STEXT_PERSG,ma_persk.STEXT STEXT_PERSK,ma_werks.STEXT STEXT_WERKS "
+        $sql = "SELECT eo.PERNR,ORGEH,PLANS,STELL,PERSG,PERSK,CNAME,GBDAT,WERKS,ABKRS,ma_persg.STEXT STEXT_PERSG,ma_persk.STEXT STEXT_PERSK,ma_werks.STEXT STEXT_WERKS "
                 . ",mo_c.STEXT C_STEXT,mo_c.SHORT C_SHORT,mo_s.STEXT S_STEXT,mo_o.SHORT O_SHORT,mo_o.STEXT O_STEXT,TIMESTAMPDIFF(YEAR, GBDAT, CURDATE()) AS age FROM "
-                . "(SELECT PERNR,ORGEH,PLANS,STELL,PERSG,PERSK,WERKS FROM tm_emp_org WHERE CURDATE() BETWEEN BEGDA AND ENDDA AND PERNR IN(" . implode(",", $aPernr) . ")) eo "
+                . "(SELECT PERNR,ORGEH,PLANS,STELL,PERSG,PERSK,WERKS,ABKRS FROM tm_emp_org WHERE CURDATE() BETWEEN BEGDA AND ENDDA AND PERNR IN(" . implode(",", $aPernr) . ")) eo "
                 . "JOIN (SELECT PERNR,CNAME,GBDAT FROM tm_master_emp WHERE CURDATE() BETWEEN BEGDA AND ENDDA AND PERNR IN(" . implode(",", $aPernr) . ")) me ON eo.PERNR = me.PERNR "
                 . "LEFT JOIN (SELECT SHORT,STEXT FROM tm_master_abbrev where SUBTY='3') ma_persg ON eo.PERSG=ma_persg.SHORT "
                 . "LEFT JOIN (SELECT SHORT,STEXT FROM tm_master_abbrev where SUBTY='4') ma_persk ON eo.PERSK=ma_persk.SHORT "

@@ -12,20 +12,24 @@
         <th>Reminder Date</th>
         <th>Begin Date</th>
         <th>End date</th>
+        <th>Payroll Area</th>
+        <th>Company</th>
     </tr>
     <?php
     foreach($rows as $row){
     ?>
     <tr>
         <td><?php echo $row['PERNR'];?></td>
-        <td><?php echo $emp[$row['PERNR']]['CNAME'];?></td>
-        <td><?php echo $emp[$row['PERNR']]['O_STEXT'];?> ( <?php echo $emp[$row['PERNR']]['O_SHORT'];?> ) </td>
-        <td><?php echo $emp[$row['PERNR']]['S_STEXT'];?></td>
-        <td><?php echo $row['REMINDER_TYPE'];?></td>
-        <td><?php echo $abbrev[$row['REMINDER_TYPE']]['text'];?></td>
-        <td><?php echo $row['REMINDER_DATE'];?></td>
-        <td><?php echo $row['BEGDA'];?></td>
-        <td><?php echo $row['ENDDA'];?></td>
+        <td><?php echo (!mpty($emp[$row['PERNR']]['CNAME']))?$emp[$row['PERNR']]['CNAME'] : "";?></td>
+        <td><?php echo (!empty($emp[$row['PERNR']]['O_STEXT']))?$emp[$row['PERNR']]['O_STEXT']:"";?> ( <?php echo (!empty($emp[$row['PERNR']]['O_SHORT']))?$emp[$row['PERNR']]['O_SHORT']:"";?> ) </td>
+        <td><?php echo (!empty($emp[$row['PERNR']]['S_STEXT']))?$emp[$row['PERNR']]['S_STEXT']:"";?></td>
+        <td><?php echo (!empty($row['REMINDER_TYPE']))?$row['REMINDER_TYPE']:"";?></td>
+        <td><?php echo (!empty($abbrev[$row['REMINDER_TYPE']]['text']))?$abbrev[$row['REMINDER_TYPE']]['text']:"";?></td>
+        <td><?php echo (!empty($row['REMINDER_DATE']))?$row['REMINDER_DATE']:"";?></td>
+        <td><?php echo (!empty($row['BEGDA']))?$row['BEGDA']:"";?></td>
+        <td><?php echo (!empty($row['ENDDA']))?$row['ENDDA']:"";?></td>
+        <td><?php echo (!empty($row['ABKRS']))?$row['ABKRS']:"";?></td>
+        <td><?php echo (!empty($row['WERKS']))?$row['WERKS']:"";?></td>
     </tr>
     <?php
     }
