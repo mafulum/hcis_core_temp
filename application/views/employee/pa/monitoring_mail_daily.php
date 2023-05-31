@@ -20,7 +20,7 @@
     ?>
     <tr>
         <td><?php echo $row['PERNR'];?></td>
-        <td><?php echo (!mpty($emp[$row['PERNR']]['CNAME']))?$emp[$row['PERNR']]['CNAME'] : "";?></td>
+        <td><?php echo (!empty($emp[$row['PERNR']]['CNAME']))?$emp[$row['PERNR']]['CNAME'] : "";?></td>
         <td><?php echo (!empty($emp[$row['PERNR']]['O_STEXT']))?$emp[$row['PERNR']]['O_STEXT']:"";?> ( <?php echo (!empty($emp[$row['PERNR']]['O_SHORT']))?$emp[$row['PERNR']]['O_SHORT']:"";?> ) </td>
         <td><?php echo (!empty($emp[$row['PERNR']]['S_STEXT']))?$emp[$row['PERNR']]['S_STEXT']:"";?></td>
         <td><?php echo (!empty($row['REMINDER_TYPE']))?$row['REMINDER_TYPE']:"";?></td>
