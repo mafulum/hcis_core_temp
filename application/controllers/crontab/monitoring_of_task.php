@@ -34,6 +34,7 @@ class monitoring_of_task extends CI_Controller {
             if(empty($aEmp)){
                 return null;
             }
+            var_dump($aEmp);exit;
             $this->load->model('emp_reminder_m');
             $aEmail = $this->emp_reminder_m->getListEmail(emp_reminder_m::MONITORING_OF_TASK_DAILY);
             if(empty($aEmail)){
