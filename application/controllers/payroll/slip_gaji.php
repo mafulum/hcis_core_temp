@@ -470,6 +470,7 @@ class slip_gaji extends CI_Controller {
 
     public function generate_slip_regular($id_document_transfer) {
         set_time_limit(0);
+        $file_go_trash = false;
         $doc_transfer = $this->document_transfer_m->getDocumentTransfer($id_document_transfer);
         if (empty($doc_transfer)) {
             return null;
@@ -482,32 +483,39 @@ class slip_gaji extends CI_Controller {
             foreach ($bank_transfer_emps as $btemps) {
                 if (empty($btemps['PERNR'])) {
                     continue;
-//                    var_dump($btemps);
-//                    exit;
                 }
-                $aret = $this->generate_single_regular($id_document_transfer, $btemps['PERNR'], null, $btemps['id_bank_transfer'], true);
-                // $aret = $this->generate_single_regular($id_document_transfer, $btemps['PERNR'], $btemps['ABKRS'], $btemps['id_bank_transfer'], true);
-                if (!empty($aret) && !empty($aret['pdf'])) {
-                    $pernr = $btemps['PERNR'];
-                    $year = $aret['year'];
-                    if (!is_dir("payslip/" . $pernr)) {
-                        mkdir("payslip/" . $pernr);
+                $profile = $this->running_payroll_m->get_emp_profile_by_pernr_bank_transfer($id_document_transfer, $btemps['PERNR'], null);
+                $filename=null;
+                if(empty($profile)){
+                    echo __LINE__;exit;
+                }else{
+                    $filename = $profile['periode_text'].".pdf";
+                }
+                $aRet=null;
+                $pernr = $btemps['PERNR'];
+                $year = $aret['year'];
+                if (!is_dir("payslip/" . $pernr)) {
+                    mkdir("payslip/" . $pernr);
+                }
+                if (!is_dir("payslip/" . $pernr . "/" . $year)) {
+                    mkdir("payslip/" . $pernr . "/" . $year);
+                }
+                if (is_file("payslip/" . $pernr . "/" . $year . "/" . $filename)==false || $file_go_trash)) {
+                    $aret = $this->generate_single_regular($id_document_transfer, $btemps['PERNR'], null, $btemps['id_bank_transfer'], true);
+                    if (!empty($aret) && !empty($aret['pdf'])) {
+                        if (is_file("payslip/" . $pernr . "/" . $year . "/" . $aret['filename']) && $file_go_trash) {
+                            rename("payslip/" . $pernr . "/" . $year . "/" . $aret['filename'], "payslip/trash/" . $pernr . "_" . $year . "_" . $aret['filename'] . "_" . date("YmdHis"));
+                        }
+                        $spath = "payslip/" . $pernr . "/" . $year . "/" . $aret['filename'];
+                        $aret['pdf']->output('F', $spath);
+                        $zip->addFile($spath);
                     }
-                    if (!is_dir("payslip/" . $pernr . "/" . $year)) {
-                        mkdir("payslip/" . $pernr . "/" . $year);
-                    }
-                    if (is_file("payslip/" . $pernr . "/" . $year . "/" . $aret['filename'])) {
-                        //move to trash
-                        rename("payslip/" . $pernr . "/" . $year . "/" . $aret['filename'], "payslip/trash/" . $pernr . "_" . $year . "_" . $aret['filename'] . "_" . date("YmdHis"));
-                    }
-                    $spath = "payslip/" . $pernr . "/" . $year . "/" . $aret['filename'];
-                    $aret['pdf']->output('F', $spath);
+                }else if(is_file("payslip/" . $pernr . "/" . $year . "/" . $filename) && $file_go_trash==false){
+                    $spath = "payslip/" . $pernr . "/" . $year . "/" . $filename;
                     $zip->addFile($spath);
-    //                $btemps
-                    //check folder pernr/tahun     
-                    // pernr/period regular /tahun/ offcycle --- 2021-01.pdf / offcycle : 2021-01-01_CBLABLABLA.pdf
-                    //save in directory employee
                 }
+                // $aret = $this->generate_single_regular($id_document_transfer, $btemps['PERNR'], $btemps['ABKRS'], $btemps['id_bank_transfer'], true);
+                
             }
             $zip->close();
         }
