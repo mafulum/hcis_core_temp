@@ -226,6 +226,8 @@ class slip_gaji extends CI_Controller {
                 $filename = getcwd().'/payslip/'.$nopeg."/".$year."/".$period.".pdf";
                 if(is_file($filename)){
                     $zip->addFile($filename);
+                }else{
+                    die($filename);
                 }
             }
         }
