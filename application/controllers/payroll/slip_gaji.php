@@ -204,6 +204,7 @@ class slip_gaji extends CI_Controller {
         $zipname = "payslip/trash/gm_".date("Ymd_His").'.zip';
         $zip = new ZipArchive;
         $zip->open($zipname, ZipArchive::CREATE);
+        $aFile=[];
         if(!empty($offcycle)){
             $this->load->model('payroll/offcycle_m');
             $oOffcycle = $this->offcycle_m->getOffCycle($offcycle);
@@ -213,10 +214,12 @@ class slip_gaji extends CI_Controller {
                 $filename_2 = getcwd().'/payslip/'.$nopeg."/".$year."/OFFCYCLE_".$oOffcycle['name'].".pdf";
                 if(is_file($filename_1)){
                     $filename=$filename_1;
-                    $zip->addFile($filename);
+                    $aFile[]=$filename;
+                    $zip->addFile($filename,$nopeg."_OFFCYCLE_".$oOffcycle['id'].".pdf");
                 }else if(is_file($filename_2)){
                     $filename=$filename_2;
-                    $zip->addFile($filename);
+                    $aFile[]=$filename;
+                    $zip->addFile($filename,$nopeg."_OFFCYCLE_".$oOffcycle['name'].".pdf");
                 }else{
                     die($filename_1."|".$filename_2);
                 }
@@ -225,7 +228,8 @@ class slip_gaji extends CI_Controller {
             foreach($a_nopeg as $nopeg){
                 $filename = getcwd().'/payslip/'.$nopeg."/".$year."/".$period.".pdf";
                 if(is_file($filename)){
-                    $zip->addFile($filename);
+                    $aFile[]=$filename;
+                    $zip->addFile($filename,$nopeg."_".$period.".pdf");
                 }else{
                     die($filename);
                 }
