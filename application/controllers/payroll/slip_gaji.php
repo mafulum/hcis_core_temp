@@ -101,7 +101,8 @@ class slip_gaji extends CI_Controller {
                             success: function(response) {
                                 console.log(response);
                                 var json = $.parseJSON(response);
-                                window.location = "'. base_url().'index.php/payroll/slip_gaji/download_go_massal?content="+json.obj
+                                window.location = "'. base_url().'index.php/payroll/slip_gaji/download_go_massal?content="+json.obj;
+                                setTimeout($.unblockUI, 500);
                             },
                             error: function(xhr) {
                                 blockPage("Error");
@@ -239,7 +240,7 @@ class slip_gaji extends CI_Controller {
         $file_content = $this->input->get('content');
         $zipname = base64_decode($file_content);
         header('Content-Type: application/zip');
-        header('Content-disposition: attachment; filename='.$zipname);
+        header('Content-disposition: attachment; filename='.date("YmdHis").".zip");
         header('Content-Length: ' . filesize($zipname));
         readfile($zipname);
     }
