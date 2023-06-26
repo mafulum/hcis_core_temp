@@ -544,7 +544,7 @@ class slip_gaji extends CI_Controller {
 
     public function generate_slip_regular($id_document_transfer) {
         set_time_limit(0);
-        $file_go_trash = false;
+        $file_go_trash = true;
         $doc_transfer = $this->document_transfer_m->getDocumentTransfer($id_document_transfer);
         if (empty($doc_transfer)) {
             return null;
@@ -574,7 +574,7 @@ class slip_gaji extends CI_Controller {
                 if (!is_dir("payslip/" . $pernr . "/" . $year)) {
                     mkdir("payslip/" . $pernr . "/" . $year);
                 }
-                if (is_file("payslip/" . $pernr . "/" . $year . "/" . $filename)==false || $file_go_trash)) {
+                if (is_file("payslip/" . $pernr . "/" . $year . "/" . $filename)==false || $file_go_trash) {
                     $aret = $this->generate_single_regular($id_document_transfer, $btemps['PERNR'], null, $btemps['id_bank_transfer'], true);
                     if (!empty($aret) && !empty($aret['pdf'])) {
                         if (is_file("payslip/" . $pernr . "/" . $year . "/" . $aret['filename']) && $file_go_trash) {
