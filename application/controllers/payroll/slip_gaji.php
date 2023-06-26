@@ -229,6 +229,7 @@ class slip_gaji extends CI_Controller {
                 }
             }
         }
+        $zip->close();
         echo json_encode(["obj"=>base64_encode($zipname)]);
         // header('Content-Type: application/zip');
         // header('Content-disposition: attachment; filename='.$zipname);
@@ -239,6 +240,9 @@ class slip_gaji extends CI_Controller {
     public function download_go_massal(){
         $file_content = $this->input->get('content');
         $zipname = base64_decode($file_content);
+        if(is_file($zipname)==false){
+            die("Not Found");
+        }
         header('Content-Type: application/zip');
         header('Content-disposition: attachment; filename='.date("YmdHis").".zip");
         header('Content-Length: ' . filesize($zipname));
