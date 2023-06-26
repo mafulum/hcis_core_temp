@@ -232,7 +232,7 @@ class slip_gaji extends CI_Controller {
             }
         }
         $zip->close();
-        echo json_encode(["obj"=>base64_encode($zipname)]);
+        echo json_encode(["obj"=>base64_encode($zipname),"pernr"=>$a_nopeg]);
         // header('Content-Type: application/zip');
         // header('Content-disposition: attachment; filename='.$zipname);
         // header('Content-Length: ' . filesize($zipname));
