@@ -87,6 +87,30 @@ class slip_gaji extends CI_Controller {
                         }
                     });
 
+                    $("#fGenMasal").click(function(){
+                        blockPage("Please wait for a while ");
+                        $.ajax({
+                            url: "'. base_url().'index.php/payroll/slip_gaji/go_massal",
+                            type: "get", //send it through get method
+                            timeout : 0,
+                            data: { 
+                              year: $("#gmFPeriodRegular").val(),
+                              offcycle: $("#gmOffcycle").val(),
+                              nopegs: $("#fniks").val(),
+                            },
+                            success: function(response) {
+                                console.log(response);
+                                var json = $.parseJSON(response);
+                                window.location = "'. base_url().'index.php/payroll/slip_gaji/download_go_massal?content="+json.obj
+                            },
+                            error: function(xhr) {
+                                blockPage("Error");
+                                setTimeout($.unblockUI, 500);
+                            }
+                        });
+                        
+                    });
+
                     $("#fProcess").click(function(){
                         blockPage("Please wait for a while ");
                         vis_reg = "on";
@@ -159,12 +183,62 @@ class slip_gaji extends CI_Controller {
                     $("#cPeriodRegular").datepicker({
                         autoclose: true
                     });
+                    $("#gmCPeriodRegular").datepicker({
+                        autoclose: true
+                    });
                     $("[data-toggle=\'switch\']").wrap(\'<div class="switch" />\').parent().bootstrapSwitch();
 		});
 		</script>';
         $this->load->view('main', $data);
     }
 
+    public function go_massal(){
+        set_time_limit(0);
+        ini_set("max_execution_time",3600);
+        $period = $this->input->get('year');
+        $offcycle = $this->input->get('offcycle');
+        $nopegs = $this->input->get('nopegs');
+        $a_nopeg=explode(";",$nopegs);
+        $year = substr($period,0,4);
+        $zipname = "payslip/trash/gm_".date("Ymd_His").'.zip';
+        $zip = new ZipArchive;
+        $zip->open($zipname, ZipArchive::CREATE);
+        if(!empty($offcycle)){
+            $this->load->model('payroll/offcycle_m');
+            $oOffcycle = $this->offcycle_m->getOffCycle($offcycle);
+            $year = substr($oOffcycle['evtda'],0,4);
+            $filename_1 = getcwd().'/payslip/'.$nopeg."/".$year."/OFFCYCLE_".$oOffcycle['id'].".pdf";
+            $filename_2 = getcwd().'/payslip/'.$nopeg."/".$year."/OFFCYCLE_".$oOffcycle['name'].".pdf";
+            if(is_file($filename_1)){
+                $filename=$filename_1;
+                $zip->addFile($filename);
+            }else if(is_file($filename_2)){
+                $filename=$filename_2;
+                $zip->addFile($filename);
+            }else{
+                die($filename_1."|".$filename_2);
+            }
+        }else{
+            $filename = getcwd().'/payslip/'.$nopeg."/".$year."/".$period.".pdf";
+            if(is_file($filename)){
+                $zip->addFile($filename);
+            }
+        }
+        echo json_encode(["obj"=>base64_encode($zipname)]);
+        // header('Content-Type: application/zip');
+        // header('Content-disposition: attachment; filename='.$zipname);
+        // header('Content-Length: ' . filesize($zipname));
+        // readfile($zipname);
+    }
+
+    public function download_go_massal(){
+        $file_content = $this->input->get('content');
+        $zipname = base64_decode($file_content);
+        header('Content-Type: application/zip');
+        header('Content-disposition: attachment; filename='.$zipname);
+        header('Content-Length: ' . filesize($zipname));
+        readfile($zipname);
+    }
     
     public function go() {
         set_time_limit(0);
