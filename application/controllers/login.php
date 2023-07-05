@@ -13,6 +13,7 @@ class Login extends CI_Controller {
     }
 
     public function index() {
+        die("HERE");
         if ($this->session->userdata('id')) {
             redirect('dashboard', 'refresh');
         } else {
