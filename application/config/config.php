@@ -18,14 +18,16 @@ if(false && strpos($_SERVER['SERVER_NAME'], "garudapratama.com")){
 |
 */
 // $config['base_url']	= 'http://localhost:8008';
-$config['base_url']	= 'https://byc-hcis.garudapratama.com/hcis_gdps/';
+// $config['base_url']	= 'https://byc-hcis.garudapratama.com/hcis_gdps/';
+$config['base_url']	= 'http://temp-byc-hcis.garudapratama.com/hcis_gdps/';
 // $config['base_url']	= 'http://192.168.28.106:8008/';
 //$config['base_url']	= 'http://192.168.2.99/hris_gdps_temp/';
 //$config['base_url']	= 'http://192.168.1.136/talent/';
 // $config['base_url']	= 'http://192.168.1.7:8008/';
 // $config['base_url']	= 'https://hcis-gdps.gdps-test.com/';
 date_default_timezone_set('Asia/Jakarta');
-$config['base_url_engine_payroll']	= 'http://172.17.0.1:8001';
+$config['base_url_engine_payroll']	= 'http://192.168.1.48:8001';
+// http://172.17.0.1:8001';
 // $config['base_url_engine_payroll']	= 'http://10.229.207.148:8001';
 /*
 |--------------------------------------------------------------------------
@@ -369,6 +371,7 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-$config['PATH_PHOTO_EMP'] = 'http://10.161.35.148:8183/api/direct_thumbnail/';
+$config['PATH_PHOTO_EMP'] = 'http://192.168.1.48:8183/api/direct_thumbnail/';
+// 'http://10.161.35.148:8183/api/direct_thumbnail/';
 /* End of file config.php */
 /* Location: ./application/config/config.php */
