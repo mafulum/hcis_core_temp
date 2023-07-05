@@ -39,7 +39,7 @@
 */
 
 $route['default_controller'] = "dashboard";
-$route['404_override'] = 'error';
+$route['404_override'] = 'cierror';
 
 
 /* End of file routes.php */

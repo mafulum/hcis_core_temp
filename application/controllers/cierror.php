@@ -1,5 +1,4 @@
 <?php
-namespace application\controllers;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -10,7 +9,7 @@ namespace application\controllers;
  *
  * @author Garuda
  */
-class error extends CI_Controller {
+class cierror extends CI_Controller {
 
     //put your code herbvge
     public function __construct() {
