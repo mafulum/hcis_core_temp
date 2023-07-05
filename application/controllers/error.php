@@ -1,5 +1,5 @@
 <?php
-
+namespace application\controllers;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
