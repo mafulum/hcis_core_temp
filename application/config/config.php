@@ -19,7 +19,7 @@ if(false && strpos($_SERVER['SERVER_NAME'], "garudapratama.com")){
 */
 // $config['base_url']	= 'http://localhost:8008';
 // $config['base_url']	= 'https://byc-hcis.garudapratama.com/hcis_gdps/';
-$config['base_url']	= 'https://temp-byc-hcis.garudapratama.com/hcis_gdps/';
+$config['base_url']	= 'https://byc-hcis.garudapratama.com/hcis_gdps/';
 // $config['base_url']	= 'http://192.168.28.106:8008/';
 //$config['base_url']	= 'http://192.168.2.99/hris_gdps_temp/';
 //$config['base_url']	= 'http://192.168.1.136/talent/';
