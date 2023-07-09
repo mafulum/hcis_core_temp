@@ -19,11 +19,11 @@ if(false && strpos($_SERVER['SERVER_NAME'], "garudapratama.com")){
 */
 // $config['base_url']	= 'http://localhost:8008';
 // $config['base_url']	= 'https://byc-hcis.garudapratama.com/hcis_gdps/';
-$config['base_url']	= 'https://byc-hcis.garudapratama.com/hcis_gdps/';
+// $config['base_url']	= 'https://byc-hcis.garudapratama.com/hcis_gdps/';
 // $config['base_url']	= 'http://192.168.28.106:8008/';
 //$config['base_url']	= 'http://192.168.2.99/hris_gdps_temp/';
 //$config['base_url']	= 'http://192.168.1.136/talent/';
-// $config['base_url']	= 'http://192.168.1.7:8008/';
+$config['base_url']	= 'http://192.168.1.48:8008/';
 // $config['base_url']	= 'https://hcis-gdps.gdps-test.com/';
 date_default_timezone_set('Asia/Jakarta');
 $config['base_url_engine_payroll']	= 'http://192.168.1.48:8001';
