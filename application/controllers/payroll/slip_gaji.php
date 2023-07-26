@@ -601,20 +601,26 @@ class slip_gaji extends CI_Controller {
                     echo $id_document_transfer . " | ".$btemps['PERNR']. " | EMPTY PROFILE BANK TRANSFER";
                     echo __LINE__;exit;
                 }else{
-                    $filename = $profile['periode_text'].".pdf";
+                    if(empty($payroll_running[$profile['id_payroll_running']])){
+                        $temp_payroll_running=$this->running_payroll_m->get_by_id($profile['id_payroll_running']);
+                        if(empty($temp_payroll_running)){
+                            continue;
+                        }
+                        $payroll_running[$profile['id_payroll_running']] = $temp_payroll_running;
+                    }else{
+                        $temp_payroll_running = $payroll_running[$profile['id_payroll_running']];
+                    }
+                    
+                    if (empty($payroll_running['offcycle'])) {
+                        $filename = $temp_payroll_running['periode_regular'];
+                    } else {
+                        $filename = $temp_payroll_running['date_off_cycle'] . "_" . $temp_payroll_running['name_of_process'];
+                    }
+                    // $filename = $profile['periode_text'].".pdf";
                 }
                 $aRet=null;
                 $pernr = $btemps['PERNR'];
-                if(empty($payroll_running[$profile['id_payroll_running']])){
-                    $temp_payroll_running=$this->running_payroll_m->get_by_id($profile['id_payroll_running']);
-                    if(empty($temp_payroll_running)){
-                        continue;
-                    }
-                    $payroll_running[$profile['id_payroll_running']] = $temp_payroll_running;
-                }
-                // var_dump($profile);exit;
                 $year = substr($payroll_running[$profile['id_payroll_running']]['periode_regular'],0,4);
-                // die($year);
                 if (!is_dir("payslip/" . $pernr)) {
                     mkdir("payslip/" . $pernr);
                 }
