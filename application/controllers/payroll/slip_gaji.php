@@ -585,7 +585,7 @@ class slip_gaji extends CI_Controller {
                     //CHECK IF INOUT
                     $bank_transfer = $this->bank_transfer_m->getBankTransfer($btemps['id_bank_transfer']);
                     $in_out_name = substr($bank_transfer['name'],6);
-                    echo $in_out_name;exit;
+                    // echo $in_out_name;exit;
                     $inout = $this->in_out_m->getInOutByName($in_out_name);
                     if(!empty($inout)){
                         continue;
