@@ -612,7 +612,7 @@ class slip_gaji extends CI_Controller {
                     }
                     $payroll_running[$profile['id_payroll_running']] = $temp_payroll_running;
                 }
-                var_dump($profile);exit;
+                // var_dump($profile);exit;
                 $year = substr($payroll_running[$profile['id_payroll_running']]['periode_regular'],0,4);
                 die($year);
                 if (!is_dir("payslip/" . $pernr)) {
