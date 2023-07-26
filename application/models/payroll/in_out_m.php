@@ -217,4 +217,14 @@ class in_out_m extends CI_Model {
         return array('id_iop' => $id_iop, 'wgtyp' => $wgtyp);
     }
 
+    public function getInOutByName($name){
+        $this->db->from($this->table);
+        $this->db->where('name_inout',$name);
+        $temp = $this->db->get();
+        if(empty($temp) || $temp->num_rows()==0){
+            return null;
+        }
+        return $temp->row_array();
+    }
+
 }

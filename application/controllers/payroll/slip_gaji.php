@@ -564,6 +564,7 @@ class slip_gaji extends CI_Controller {
         if (empty($doc_transfer)) {
             return null;
         }
+        $inout=[];
         $bank_transfer_emps = $this->bank_transfer_m->getPernrAbkrsStagesByIDStages(explode(",", $doc_transfer['id_bts_codes']));
         $zipname = "payslip/SLIP_".$id_document_transfer.'_'.$doc_transfer['name']. '.zip';
         if (is_file($zipname)==false) {
@@ -581,6 +582,11 @@ class slip_gaji extends CI_Controller {
                 $profile = $this->running_payroll_m->get_emp_profile_by_pernr_bank_transfer($btemps['id_bank_transfer'], $btemps['PERNR'], null);
                 $filename=null;
                 if(empty($profile)){
+                    //CHECK IF INOUT
+                    $bank_transfer = $this->bank_transfer_m->getBankTransfer($btemps['id_bank_transfer']);
+                    $in_out_name = substr($bank_transfer['name'],5);
+                    echo $in_out_name;exit;
+                    $inout = $this->in_out_m->getInOutByName($in_out_name);
                     var_dump($btemps);
                     echo $id_document_transfer . " | ".$btemps['PERNR']. " | EMPTY PROFILE BANK TRANSFER";
                     echo __LINE__;exit;
