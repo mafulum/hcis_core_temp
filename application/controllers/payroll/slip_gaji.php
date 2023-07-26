@@ -584,9 +584,12 @@ class slip_gaji extends CI_Controller {
                 if(empty($profile)){
                     //CHECK IF INOUT
                     $bank_transfer = $this->bank_transfer_m->getBankTransfer($btemps['id_bank_transfer']);
-                    $in_out_name = substr($bank_transfer['name'],5);
+                    $in_out_name = substr($bank_transfer['name'],6);
                     echo $in_out_name;exit;
                     $inout = $this->in_out_m->getInOutByName($in_out_name);
+                    if(!empty($inout)){
+                        continue;
+                    }
                     var_dump($btemps);
                     echo $id_document_transfer . " | ".$btemps['PERNR']. " | EMPTY PROFILE BANK TRANSFER";
                     echo __LINE__;exit;
