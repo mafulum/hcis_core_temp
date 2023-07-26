@@ -574,6 +574,10 @@ class slip_gaji extends CI_Controller {
                 if (empty($btemps['PERNR'])) {
                     continue;
                 }
+                if(!empty($inout[$btemps['id_bank_transfer']])){
+                    //already detected as inout process
+                    continue;
+                }
                 if (empty($btemps['id_bank_transfer'])) {
                     var_dump($btemps);
                     echo $id_document_transfer . " | ".$btemps['id_bank_transfer']. " | EMPTY PROFILE BANK TRANSFER";
@@ -588,6 +592,7 @@ class slip_gaji extends CI_Controller {
                     // echo $in_out_name;exit;
                     $inout = $this->in_out_m->getInOutByName($in_out_name);
                     if(!empty($inout)){
+                        $inout[$btemps['id_bank_transfer']]=$inout;
                         continue;
                     }
                     var_dump($btemps);
