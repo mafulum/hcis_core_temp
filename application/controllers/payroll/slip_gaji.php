@@ -576,6 +576,7 @@ class slip_gaji extends CI_Controller {
                 $profile = $this->running_payroll_m->get_emp_profile_by_pernr_bank_transfer($id_document_transfer, $btemps['PERNR'], null);
                 $filename=null;
                 if(empty($profile)){
+                    echo $id_document_transfer . " | ".$btemps['PERNR']. " | EMPTY PROFILE BANK TRANSFER";
                     echo __LINE__;exit;
                 }else{
                     $filename = $profile['periode_text'].".pdf";
