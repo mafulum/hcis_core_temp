@@ -566,6 +566,7 @@ class slip_gaji extends CI_Controller {
             return null;
         }
         $inout=[];
+        $payroll_running=[];
         $bank_transfer_emps = $this->bank_transfer_m->getPernrAbkrsStagesByIDStages(explode(",", $doc_transfer['id_bts_codes']));
         $zipname = "payslip/SLIP_".$id_document_transfer.'_'.$doc_transfer['name']. '.zip';
         if (is_file($zipname)==false) {
@@ -604,8 +605,15 @@ class slip_gaji extends CI_Controller {
                 }
                 $aRet=null;
                 $pernr = $btemps['PERNR'];
+                if(empty($payroll_running[$profile['id_payroll_running']])){
+                    $temp_payroll_running=$this->running_payroll_m->get_by_id($profile['id_payroll_running']);
+                    if(empty($temp_payroll_running)){
+                        continue;
+                    }
+                    $payroll_running[$profile['id_payroll_running']] = $temp_payroll_running;
+                }
                 var_dump($profile);exit;
-                $year = substr($profile['periode_text'],0,4);
+                $year = substr($payroll_running[$profile['id_payroll_running']]['periode_regular'],0,4);
                 die($year);
                 if (!is_dir("payslip/" . $pernr)) {
                     mkdir("payslip/" . $pernr);
