@@ -604,7 +604,8 @@ class slip_gaji extends CI_Controller {
                 }
                 $aRet=null;
                 $pernr = $btemps['PERNR'];
-                $year = $aret['year'];
+                $year = substr($profile['periode_text'],0,4);
+                die($year);
                 if (!is_dir("payslip/" . $pernr)) {
                     mkdir("payslip/" . $pernr);
                 }
