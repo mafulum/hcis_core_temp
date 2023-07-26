@@ -17,6 +17,7 @@ class slip_gaji extends CI_Controller {
         parent::__construct();
         $this->load->model('payroll/running_payroll_m');
         $this->load->model('payroll/bank_transfer_m');
+        $this->load->model('payroll/in_out_m');
         $this->load->model('orgchart_m');
         $this->load->model('global_m');
         $this->load->model('payroll/slip_mail_m');
