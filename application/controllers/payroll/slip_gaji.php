@@ -573,10 +573,15 @@ class slip_gaji extends CI_Controller {
                 if (empty($btemps['PERNR'])) {
                     continue;
                 }
-                var_dump($btemps);
-                $profile = $this->running_payroll_m->get_emp_profile_by_pernr_bank_transfer($id_document_transfer, $btemps['PERNR'], null);
+                if (empty($btemps['id_bank_transfer'])) {
+                    var_dump($btemps);
+                    echo $id_document_transfer . " | ".$btemps['id_bank_transfer']. " | EMPTY PROFILE BANK TRANSFER";
+                    echo __LINE__;exit;
+                }
+                $profile = $this->running_payroll_m->get_emp_profile_by_pernr_bank_transfer($btemps['id_bank_transfer'], $btemps['PERNR'], null);
                 $filename=null;
                 if(empty($profile)){
+                    var_dump($btemps);
                     echo $id_document_transfer . " | ".$btemps['PERNR']. " | EMPTY PROFILE BANK TRANSFER";
                     echo __LINE__;exit;
                 }else{
@@ -638,7 +643,7 @@ class slip_gaji extends CI_Controller {
             $arr_det_period_nopeg[$det[0].$det[1]][$det[3]][]=$det;
         }
         foreach($arr_emp as $emp){
-            var_dump($emp);
+            // var_dump($emp);
             // sort($arr_det_period_nopeg[$emp[0].$emp[1]]['+']);
             // sort($arr_det_period_nopeg[$emp[0].$emp[1]]['-']);
             // sort($arr_det_period_nopeg[$emp[0].$emp[1]]['#']);
