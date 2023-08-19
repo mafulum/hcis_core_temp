@@ -29,7 +29,7 @@
             <!--widget start-->
             <aside class="profile-nav alt green-border">
                 <section class="panel">
-                    <div class="user-heading alt" style="background: #EE7D30;">
+                    <div class="user-heading alt" style="background: #2F90ED;">
                         <a href="#myModal2" data-toggle="modal">
                             <img alt="" src="<?= $photo_src; ?>" onerror="this.src='<?= base_url(); ?>img/photo/default.jpg';">
                         </a>

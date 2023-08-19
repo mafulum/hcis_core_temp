@@ -17,7 +17,7 @@
         </div>
         <div class="col-lg-3 col-sm-6">
             <section class="panel">
-                <div class="symbol" style="background-color: #EE7D30;">
+                <div class="symbol" style="background-color: #2F90ED;">
                     <i class="fa fa-heart"></i>
                 </div>
                 <div class="count_value">
@@ -32,7 +32,7 @@
         </div>
         <div class="col-lg-3 col-sm-6">
             <section class="panel">
-                <div class="symbol" style="background-color: #EE7D30;">
+                <div class="symbol" style="background-color: #2F90ED;">
                     <i class="fa fa-users"></i>
                 </div>
                 <div class="count_value">
@@ -116,7 +116,7 @@
         </div>
         <div class="col-lg-3 col-sm-6">
             <section class="panel">
-                <div class="symbol" style="background-color: #EE7D30;">
+                <div class="symbol" style="background-color: #2F90ED;">
                     <i class="fa fa-angle-double-down"></i>
                 </div>
                 <div class="count_value">
@@ -131,7 +131,7 @@
         </div>
         <div class="col-lg-3 col-sm-6">
             <section class="panel">
-                <div class="symbol" style="background-color: #EE7D30;">
+                <div class="symbol" style="background-color: #2F90ED;">
                     <i class="fa fa-angle-double-up"></i>
                 </div>
                 <div class="count_value">

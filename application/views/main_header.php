@@ -3,8 +3,6 @@
 </div>
 <!--logo start-->
 <a class="logo" href="<?php echo base_url(); ?>">
-    <img alt="" style="height: 50px;" src="<?php echo base_url(); ?>img/gdps.jpeg">
-    <img alt="" style="height: 50px;" src="<?php echo base_url(); ?>img/logo_gdps.png">
 </a>
 <!--logo end-->
 <div class="top-nav ">

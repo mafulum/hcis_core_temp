@@ -20,16 +20,16 @@
             <div class="row">
                 <div class="col-md-5 text-right">
                     <div class="form-signin" >
-                        <img src="<?php echo base_url();?>/img/Beyond_Care.png" style="width: 300px;padding-top: 20px;border-color: #000;"/>
+                        
                     </div>
                 </div>
-                <div class="col-md-5"style="border-left: 1px solid #233F90;">
+                <div class="col-md-5"style="border-left: 1px solid #333333;">
                     <form method="post" class="form-signin" action="<?php echo base_url(); ?>index.php/login">
-                        <h2 style="color:#233F90;text-align: center;font-weight: bolder;">Sign In</h2>
+                        <h2 style="color:#333333;text-align: center;font-weight: bolder;">Sign In</h2>
                         <div class="login-wrap">
                             <input name="username" type="text" class="form-control" placeholder="User ID" autofocus>
                             <input name="password" type="password" class="form-control" placeholder="Password">
-                            <button class="btn btn-lg btn-login btn-block" style="background: #EE7D30;" type="submit">Sign in</button>
+                            <button class="btn btn-lg btn-login btn-block" style="background: #2F90ED;" type="submit">Sign in</button>
                             <div class="registration">
                                 <? if (validation_errors()) { ?>
                                     <?php echo $this->form_validation->error('username'); ?>				
@@ -43,10 +43,7 @@
         <div class="row" style="height: 50px;"></div>
         <div class="row" >
             <div class="col-md-2"></div>
-            <div class="col-md-8" style="border-top: 1px solid #233F90;">
-                <img src="<?php echo base_url();?>/img/gdps_logo.png" style="width: 150px;"/>
-                <img src="<?php echo base_url();?>/img/people_meets_tech.png" style="padding-left:30px;height: 25px;"/>
-                <img src="<?php echo base_url();?>/img/Beyond_Expectation_Logo-02.png" style="padding-left:30px;width: 150px;"/>
+            <div class="col-md-8" style="border-top: 1px solid #333333;">
                 <a href="#" class="go-top">
                     <i class="fa fa-angle-up"></i>
                 </a>

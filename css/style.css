@@ -226,7 +226,7 @@ ul.sidebar-menu {
 }
 
 ul.sidebar-menu li ul.sub li{
-    background: #EE7D30;
+    background: #2F80ED;
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
@@ -247,7 +247,7 @@ ul.sidebar-menu li ul.sub li a {
     -o-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    color: #3A5169;
+    color: #333333;
 }
 
 ul.sidebar-menu li ul.sub li a:hover, ul.sidebar-menu li ul.sub li.active a {
@@ -276,7 +276,7 @@ ul.sidebar-menu li a span{
 }
 
 ul.sidebar-menu li a{
-    color: #3A5169;
+    color: #333333;
     text-decoration: none;
     display: block;
     padding: 15px 0 15px 10px;
@@ -290,7 +290,7 @@ ul.sidebar-menu li a{
 }
 
 ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-    background: #EE7D30;
+    background: #2F80ED;
     color: #fff;
     display: block;
     border-radius: 4px;
@@ -2401,7 +2401,7 @@ ul.inbox-pagination li {
 .profile-nav ul > li > a {
     border-radius: 0;
     -webkit-border-radius: 0;
-    color: #3A5169;
+    color: #333333;
     border-left: 5px solid #fff;
 }
 
@@ -2971,7 +2971,7 @@ ul.amounts li {
 }
 
 .tab-bg-dark-navy-blue {
-    background: #233F90;
+    background: #333333;
     border-radius: 5px 5px 0 0;
     -webkit-border-radius: 5px 5px 0 0;
     border-bottom: none;
@@ -2989,7 +2989,7 @@ ul.amounts li {
 
 .panel-heading .nav > li.active > a, .panel-heading .nav > li > a:hover {
     color: #ECECEC;
-    background: #EE7D30;
+    background: #2F80ED;
 }
 
 .panel-heading .nav > li:first-child.active > a, .panel-heading .nav > li:first-child > a:hover {
