@@ -28,7 +28,7 @@
 	left: 0;
 	padding: 10px;
 	background: #2c3f52;
-	color: #FF6C60;
+	color: #333333;
     font-size: 13px;
 }
 
@@ -49,7 +49,7 @@
 	padding: 5px 10px;
 	border-radius: 2px;
 	display: inline-block;
-	background: #FF6C60;
+	background: #333333;
 	color: #fff;
 }
 

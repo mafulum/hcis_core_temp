@@ -27,11 +27,11 @@ a, a:hover, a:focus {
 }
 ::selection {
 
-    background: #FF6C60;
+    background: #333333;
     color: #fff;
 }
 ::-moz-selection {
-    background: #FF6C60;
+    background: #333333;
     color: #fff;
 }
 
@@ -310,11 +310,11 @@ ul.sidebar-menu li a i {
 }
 
 ul.sidebar-menu li a:hover i, ul.sidebar-menu li a:focus i {
-    color: #FF6C60;
+    color: #333333;
 }
 
 ul.sidebar-menu li a.active i {
-    color: #FF6C60;
+    color: #333333;
 }
 
 
@@ -367,7 +367,7 @@ a.logo:hover, a.logo:focus {
 }
 
 a.logo span {
-    color: #FF6C60;
+    color: #333333;
 }
 
 
@@ -451,7 +451,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .dropdown-menu.extended li p.red {
-    background-color: #ff6c60;
+    background-color: #333333;
     color: #fff;
 }
 
@@ -660,9 +660,9 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     border-top-color: #FCB322 !important;
 }
 .notify-arrow-red {
-    border-color: transparent transparent #ff6c60;
-    border-bottom-color: #ff6c60 !important;
-    border-top-color: #ff6c60 !important;
+    border-color: transparent transparent #333333;
+    border-bottom-color: #333333 !important;
+    border-top-color: #333333 !important;
 }
 .notify-arrow-green {
     border-color: transparent transparent #a9d86e;
@@ -793,7 +793,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .state-overview .red {
-    background: #ff6c60;
+    background: #333333;
 }
 
 .state-overview .yellow {
@@ -1079,7 +1079,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .badge.bg-important {
-    background: #ff6c60;
+    background: #333333;
 }
 
 .badge.bg-info {
@@ -1333,7 +1333,7 @@ h3.timeline-title {
 /*---revenue----*/
 
 .revenue-head {
-    background: #ff6c60;
+    background: #333333;
     -webkit-border-radius: 4px 4px 0px 0px;
     border-radius: 4px 4px 0px 0px;
     color: #fff;
@@ -1391,7 +1391,7 @@ h3.timeline-title {
 }
 
 .chart-info .increase {
-    background: #ff6c60;
+    background: #333333;
     width: 10px;
     height: 10px;
 }
@@ -1464,7 +1464,7 @@ h3.timeline-title {
     font-size: 16px;
 }
 .panel-footer.revenue-foot ul li a:hover i, .panel-footer.revenue-foot ul li.active a i {
-    color: #ff6c60;
+    color: #333333;
     display: block;
     font-size: 16px;
 }
@@ -1993,7 +1993,7 @@ a.mail-dropdown {
 }
 
 .btn-compose {
-    background: #ff6c60;
+    background: #333333;
     padding: 12px 0;
     text-align: center;
     width: 100%;
@@ -2249,7 +2249,7 @@ ul.inbox-pagination li {
 }
 
 .view-mail a {
-    color: #FF6C60;
+    color: #333333;
 }
 
 .attachment-mail {
@@ -2858,7 +2858,7 @@ ul.amounts li {
 
 .fc-state-active, .fc-state-active .fc-button-inner,
 .fc-state-hover, .fc-state-hover .fc-button-inner{
-    background:  #FF6C60 !important;
+    background:  #333333 !important;
     color: #fff !important;
 }
 
@@ -3044,7 +3044,7 @@ ul.amounts li {
 }
 
 .carousel-indicators .active {
-    background:#ff6c60;
+    background:#333333;
     height: 10px;
     margin: 1px;
     width: 10px;
@@ -4499,7 +4499,7 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
 }
 
 .ui-sortable li.list-danger {
-    border-left: 3px solid #FF6C60;
+    border-left: 3px solid #333333;
 }
 
 .ui-sortable li.list-warning {
@@ -5142,7 +5142,7 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
 }
 
 .recent-highlight {
-    background: #FF6C60 !important;
+    background: #333333 !important;
 }
 
 

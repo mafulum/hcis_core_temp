@@ -57,7 +57,7 @@ var Script = function () {
           hideHover: 'auto',
           lineWidth: 1,
           pointSize: 5,
-          lineColors: ['#4a8bc2', '#ff6c60', '#a9d86e'],
+          lineColors: ['#4a8bc2', '#333333', '#a9d86e'],
           fillOpacity: 0.5,
           smooth: true
       });

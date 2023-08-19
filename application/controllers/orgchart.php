@@ -337,7 +337,7 @@ class orgchart extends CI_Controller {
                 foreach ($aPSubs as $idx1 => $aPSub) {
                     $aParam = null;
                     $aData[$idx1]['id'] = intval($aPSub['PERNR']);
-                    $aData[$idx1]['name'] = '<span style="color:#FF6C60"><i class="fa fa-user"></i> ' . $aPSub['PERNR'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $aPSub['CNAME'] . '</span> <div class="tree-actions"><a href="' . base_url() . 'index.php/employee/master/' . intval($aPSub['PERNR']) . '"><i class="fa fa-search"></i></a>&nbsp;&nbsp;&nbsp;&nbsp; </div>';
+                    $aData[$idx1]['name'] = '<span style="color:#333333"><i class="fa fa-user"></i> ' . $aPSub['PERNR'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $aPSub['CNAME'] . '</span> <div class="tree-actions"><a href="' . base_url() . 'index.php/employee/master/' . intval($aPSub['PERNR']) . '"><i class="fa fa-search"></i></a>&nbsp;&nbsp;&nbsp;&nbsp; </div>';
                     $aData[$idx1]['type'] = 'item';
                     $aParam['id'] = intval($aPSub['PERNR']);
                     $aParam['ltype'] = 'X';

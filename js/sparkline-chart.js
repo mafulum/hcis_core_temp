@@ -98,7 +98,7 @@ var Script = function () {
         height: '22',
         barWidth: 5,
         barSpacing: 2,
-        barColor: '#ff6c60'
+        barColor: '#333333'
 //        tooltipFormat: '<span style="display:block; padding:0px 10px 12px 0px;">' +
 //            '<span style="color: {{color}}">&#9679;</span> {{offset:names}} ({{percent.1}}%)</span>'
     });

@@ -5,7 +5,7 @@ var Script = function () {
     $('.percentage').easyPieChart({
         animate: 1000,
         size: 135,
-        barColor:'#ff6c60'
+        barColor:'#333333'
     });
     $('.percentage-light').easyPieChart({
         barColor: function(percent) {
